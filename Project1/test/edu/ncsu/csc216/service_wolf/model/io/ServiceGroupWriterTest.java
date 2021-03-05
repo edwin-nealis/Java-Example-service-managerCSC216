@@ -4,7 +4,7 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-public class ServiceGroupsWriterTest {
+public class ServiceGroupWriterTest {
 
 	@Test
 	public void testServiceGroupWriter() {
