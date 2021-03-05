@@ -32,9 +32,9 @@ public class Incident {
 	/** Awaiting Caller message */
 	public static final String HOLD_AWAITING_CALLER = "Awaiting Caller";
 	/** Awaiting Change message */
-	public static final String HOLD_AWATING_CHANGE = "Awaiting Change";
+	public static final String HOLD_AWAITING_CHANGE = "Awaiting Change";
 	/** Awaiting Vendor message */
-	public static final String HOLD_AWATING_VENDOR = "Awaiting Vendor";
+	public static final String HOLD_AWAITING_VENDOR = "Awaiting Vendor";
 	/** Permanently solved message */
 	public static final String RESOLUTION_PERMANENTLY_SOLVED = "Permanently Solved";
 	/** Workaround message */
