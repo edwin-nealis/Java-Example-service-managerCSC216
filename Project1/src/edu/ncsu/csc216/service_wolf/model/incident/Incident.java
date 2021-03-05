@@ -46,7 +46,7 @@ public class Incident {
 	/** unnecessary message */
 	public static final String CANCELLATION_UNNECESSARY = "Unnecessry";
 	/** not a incident message */
-	public static final String CANCELLATION_NOT_A_INCIDENT = "Not a Incident";
+	public static final String CANCELLATION_NOT_AN_INCIDENT = "Not a Incident";
 	/** Caller canceled message */
 	public static final String CANCELLATION_CALLER_CANCELLED = "Caller Canceled";
 	/** unowned message */
