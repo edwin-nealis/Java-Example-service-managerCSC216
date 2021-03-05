@@ -70,7 +70,7 @@ public class ServiceGroup {
 	 * deleted incident based on its id
 	 * @param id
 	 */
-	public void deleteIncidentByid(int id) {
+	public void deleteIncidentById(int id) {
 		
 	}
  
