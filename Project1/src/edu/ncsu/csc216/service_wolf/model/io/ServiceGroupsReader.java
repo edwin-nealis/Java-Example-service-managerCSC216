@@ -5,11 +5,11 @@ import java.util.ArrayList;
 import edu.ncsu.csc216.service_wolf.model.incident.Incident;
 import edu.ncsu.csc216.service_wolf.model.service_group.ServiceGroup;
 
-public class ServiceGroupReader {
+public class ServiceGroupsReader {
 	/**
 	 * constructor for service group reader
 	 */
-	public ServiceGroupReader() {
+	public ServiceGroupsReader() {
 		
 	}
 	/**
