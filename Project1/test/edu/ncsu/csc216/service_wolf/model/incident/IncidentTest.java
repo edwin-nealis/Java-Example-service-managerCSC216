@@ -6,11 +6,15 @@ import java.util.ArrayList;
 
 import org.junit.Before;
 import org.junit.Test;
-
+/**
+ * tests the incindent class
+ * @author edwin
+ *
+ */
 public class IncidentTest {
 	/**
 	 * resets counter before each test
-	 * @throws Exception
+	 * @throws Exception exception
 	 */
 	@Before
 	public void setUp() throws Exception {
@@ -63,7 +67,7 @@ public class IncidentTest {
 		assertEquals(i5.getCaller(), "Caller");
 		assertEquals(i5.getReopenCount(), 0);
 		assertEquals(i5.getOwner(), "owner");
-		assertEquals(i5.getStatusDetails(),"statusDetails");
+		assertEquals(i5.getStatusDetails(), "statusDetails");
 		assertEquals(i5.getIncidentLogMessages(), "abc");
 		
 	}

@@ -3,7 +3,13 @@ package edu.ncsu.csc216.service_wolf.model.manager;
 import edu.ncsu.csc216.service_wolf.model.command.Command;
 import edu.ncsu.csc216.service_wolf.model.incident.Incident;
 import edu.ncsu.csc216.service_wolf.model.service_group.ServiceGroup;
-
+/**
+ * service group manager is an object with no fields that provides methods that work with service groups.
+ * has a save to file and a load from file for servcie groups. a gett incidets as array for the GUI a get incident by id a delete incident by id
+ * an add incident to service group and a clear service group. 
+ * @author edwin
+ *
+ */
 public class ServiceWolfManager {
 	/**
 	 * constructor for service wolf manager
@@ -20,14 +26,14 @@ public class ServiceWolfManager {
 	}
 	/**
 	 * saves to a file
-	 * @param fileName
+	 * @param fileName file name
 	 */
 	public void saveToFile(String fileName) {
 		
 	}
 	/**
 	 * load from file name
-	 * @param fileName
+	 * @param fileName file name
 	 */
 	public void loadFromFile(String fileName) {
 		
@@ -41,7 +47,7 @@ public class ServiceWolfManager {
 	}
 	/**
 	 * returns incident specified by id
-	 * @param id
+	 * @param id id
 	 * @return Incident
 	 */
 	public Incident getIncidentById(int id) {
@@ -49,31 +55,31 @@ public class ServiceWolfManager {
 	}
 	/**
 	 * passes incident give by id and passes it to command
-	 * @param temp
-	 * @param c
+	 * @param id id 
+	 * @param c command
 	 */
 	public void executeCommand(int id, Command c) {
 		
 	}
 	/**
 	 * Deletes incident by specified id
-	 * @param id
+	 * @param id id
 	 */
 	public void deleteIncidentById(int id) {
 		
 	}
 	/**
 	 * adds an incident to a service group
-	 * @param title
-	 * @param caller
-	 * @param message
+	 * @param title title
+	 * @param caller caller
+	 * @param message message for log
 	 */
 	public void addIncidentToServiceGroup(String title, String caller, String message) {
 		
 	}
 	/**
 	 * loads a service group
-	 * @param name
+	 * @param name name
 	 */
 	public void loadServiceGroup(String name) {
 		
@@ -100,28 +106,28 @@ public class ServiceWolfManager {
 	}
 	/**
 	 * edits the service group 
-	 * @param temp
+	 * @param temp temp
 	 */
 	public void editServiceGroup(String temp) {
 		
 	}
 	/**
 	 * adds service group to the list by its specified name
-	 * @param sg
+	 * @param sg Service group
 	 */
 	private void addServiceGroupToListByName(ServiceGroup sg) {
 		
 	}
 	/**
 	 * adds a service  group with parameter name 
-	 * @param name
+	 * @param name name
 	 */
 	public void addServiceGroup(String name) {
 		
 	}
 	/**
 	 * checks if two service groups are duplicates 
-	 * @param name
+	 * @param name name
 	 */
 	private void checkDuplicateServiceName(String name) {
 		

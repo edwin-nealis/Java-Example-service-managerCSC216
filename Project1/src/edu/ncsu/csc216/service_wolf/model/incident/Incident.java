@@ -87,7 +87,7 @@ public class Incident {
 	 * @param statusDetails status details
 	 * @param incidentLog incident log
 	 */
-	public Incident(int id, String state, String title, String caller, int reopenCount, String owner, String statusDetails, ArrayList<String>incidentLog) {
+	public Incident(int id, String state, String title, String caller, int reopenCount, String owner, String statusDetails, ArrayList<String> incidentLog) {
 		setId(id);
 		setState(state);
 		setTitle(title);
@@ -155,7 +155,7 @@ public class Incident {
 	}
 	/** 
 	 * sets reopen count 
-	 * @param reopenCunt num time reopned
+	 * @param reopenCount num time reopned
 	 */
 	private void setReopenCount(int reopenCount) {
 		
