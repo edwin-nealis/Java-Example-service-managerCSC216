@@ -68,9 +68,9 @@ public class Incident {
 	
 	/**
 	 * constructor for incident 
-	 * @param title
-	 * @param caller
-	 * @param message
+	 * @param title title of incident 
+	 * @param caller caller 
+	 * @param message log message
 	 */
 	public Incident(String title, String caller, String message) {
 		setTitle(title);
@@ -78,14 +78,14 @@ public class Incident {
 	}
 	/**
 	 * constructor for incident with full fields
-	 * @param id
-	 * @param state
-	 * @param title
-	 * @param caller
-	 * @param reopenCount
-	 * @param owner
-	 * @param statusDetails
-	 * @param incidentLog
+	 * @param id id
+	 * @param state state 
+	 * @param title title
+	 * @param caller caller 
+	 * @param reopenCount num of times re opened
+	 * @param owner owner
+	 * @param statusDetails status details
+	 * @param incidentLog incident log
 	 */
 	public Incident(int id, String state, String title, String caller, int reopenCount, String owner, String statusDetails, ArrayList<String>incidentLog) {
 		setId(id);
@@ -97,8 +97,9 @@ public class Incident {
 		setStatusDetails(statusDetails);
 		
 	}
-	/** sets Id value 
-	 * 
+	/** 
+	 * sets Id value 
+	 * @param id id
 	 */
 	private void setId(int id) {
 		
@@ -110,8 +111,9 @@ public class Incident {
 	public int getId() {
 		return 0;
 	}
-	/** sets state 
-	 * 
+	/** 
+	 * sets state 
+	 * @param state state
 	 */
 	private void setState(String state) {
 		
@@ -125,6 +127,7 @@ public class Incident {
 	}
 	/**
 	 * sets title
+	 * @param title title
 	 */
 	private void setTitle(String title) {
 		
@@ -138,6 +141,7 @@ public class Incident {
 	}
 	/** 
 	 * sets caller 
+	 * @param caller caller
 	 */
 	private void setCaller(String caller) {
 	
@@ -151,6 +155,7 @@ public class Incident {
 	}
 	/** 
 	 * sets reopen count 
+	 * @param reopenCunt num time reopned
 	 */
 	private void setReopenCount(int reopenCount) {
 		
@@ -163,7 +168,8 @@ public class Incident {
 		return 0;
 	}
 	/** 
-	 * sets owner  
+	 * sets owner 
+	 * @param owner owner
 	 */
 	private void setOwner(String owner) {
 		
@@ -175,8 +181,9 @@ public class Incident {
 	public String getOwner() {
 		return null;
 	}
-	/** 
-	 * sets status details 
+	/**
+	 * sets StatusDetails
+	 * @param statusDetails status details
 	 */
 	private void setStatusDetails(String statusDetails) {
 		
@@ -190,7 +197,8 @@ public class Incident {
 	}
 	/** 
 	 * adds message to incident log 
-	 * @return number   
+	 * @param message message
+	 * @return number not sure
 	 */
 	private int addMessageToIncidentLog(String message) {
 		return 0;
@@ -203,6 +211,7 @@ public class Incident {
 	}
 	/** 
 	 * sets counter 
+	 * @param counter counter
 	 */
 	public static void setCounter(int counter) {
 
@@ -226,6 +235,7 @@ public class Incident {
 	}
 	/**
 	 * updates command
+	 * @param c command
 	 */
 	public void update(Command c) {
 		 
@@ -245,6 +255,7 @@ public class Incident {
 		}
 		/**
 		 * updates state 
+		 * @param c command
 		 */
 		public void updateState(Command c) {
 			
@@ -272,6 +283,7 @@ public class Incident {
 		}
 		/**
 		 * updates state 
+		 * @param c command
 		 */
 		public void updateState(Command c) {
 			
@@ -299,6 +311,7 @@ public class Incident {
 		}
 		/**
 		 * updates state 
+		 * @param c command
 		 */
 		public void updateState(Command c) {
 			
@@ -326,6 +339,7 @@ public class Incident {
 		}
 		/**
 		 * updates state 
+		 * @param c command
 		 */
 		public void updateState(Command c) {
 			
@@ -353,6 +367,7 @@ public class Incident {
 		}
 		/**
 		 * updates state 
+		 * @param c command
 		 */
 		public void updateState(Command c) {
 			
