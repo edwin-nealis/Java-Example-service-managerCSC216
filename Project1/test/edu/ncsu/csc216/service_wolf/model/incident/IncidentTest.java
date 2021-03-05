@@ -8,6 +8,10 @@ import org.junit.Before;
 import org.junit.Test;
 
 public class IncidentTest {
+	/**
+	 * resets counter before each test
+	 * @throws Exception
+	 */
 	@Before
 	public void setUp() throws Exception {
 		//Reset the counter at the beginning of every test.

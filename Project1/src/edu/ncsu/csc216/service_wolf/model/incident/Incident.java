@@ -4,6 +4,16 @@ import java.util.ArrayList;
 
 import edu.ncsu.csc216.service_wolf.model.command.Command;
 
+/**
+ * Incident is a class that creates an object with fields incidentId, title, caller, 
+ * reopenCount, owner, statusDetails, and incidentLog. with incident log being an array list
+ * this class has two constructors one with all fields one with just title owner and a message for the log.
+ *  class also has all getters and setters for fields 
+ *  this class also implements the interface state and holds several inner class New, In
+ *  progress, On Hold, Resolver and Cancaled for this implementaion.
+ * @author Edwin Nealis
+ *
+ */
 public class Incident {
 	/** Id for incident */
 	private int incidentId;
@@ -56,10 +66,27 @@ public class Incident {
 	/** counter */
 	private static int counter = 0;
 	
+	/**
+	 * constructor for incident 
+	 * @param title
+	 * @param caller
+	 * @param message
+	 */
 	public Incident(String title, String caller, String message) {
 		setTitle(title);
 		setCaller(caller);
 	}
+	/**
+	 * constructor for incident with full fields
+	 * @param id
+	 * @param state
+	 * @param title
+	 * @param caller
+	 * @param reopenCount
+	 * @param owner
+	 * @param statusDetails
+	 * @param incidentLog
+	 */
 	public Incident(int id, String state, String title, String caller, int reopenCount, String owner, String statusDetails, ArrayList<String>incidentLog) {
 		setId(id);
 		setState(state);
@@ -70,91 +97,118 @@ public class Incident {
 		setStatusDetails(statusDetails);
 		
 	}
-	/** sets Id value */
+	/** sets Id value 
+	 * 
+	 */
 	private void setId(int id) {
 		
 	}
-	/** returns id 
+	/** 
+	 * returns id 
 	 * @return id 
 	 */
 	public int getId() {
 		return 0;
 	}
-	/** sets state */
+	/** sets state 
+	 * 
+	 */
 	private void setState(String state) {
 		
 	}
-	/** returns state 
+	/** 
+	 * returns state 
 	 * @return state 
 	 */
 	public String getState() {
 		return null;
 	}
-	/** sets title */
+	/**
+	 * sets title
+	 */
 	private void setTitle(String title) {
 		
 	}
-	/** returns title 
+	/** 
+	 * returns title 
 	 * @return title 
 	 */
 	public String getTitle() {
 		return null;
 	}
-	/** sets caller */
+	/** 
+	 * sets caller 
+	 */
 	private void setCaller(String caller) {
 	
 	}
-	/** return caller 
+	/** 
+	 * return caller 
 	 * @return caller 
 	 */
 	public String getCaller() {
 		return null;
 	}
-	/** sets reopen count */
+	/** 
+	 * sets reopen count 
+	 */
 	private void setReopenCount(int reopenCount) {
 		
 	}
-	/** returns reopen count 
+	/** 
+	 * returns reopen count 
 	 * @return reopenCount 
 	 */
 	public int getReopenCount() {
 		return 0;
 	}
-	/** sets owner  */
+	/** 
+	 * sets owner  
+	 */
 	private void setOwner(String owner) {
 		
 	}
-	/** returns owner 
+	/** 
+	 * returns owner 
 	 * @return owner
 	 */
 	public String getOwner() {
 		return null;
 	}
-	/** sets status details */
+	/** 
+	 * sets status details 
+	 */
 	private void setStatusDetails(String statusDetails) {
 		
 	}
-	/** returns status details 
+	/** 
+	 * returns status details 
 	 * @return statusDetails 
 	 */
 	public String getStatusDetails() {
 		return null;
 	}
-	/** adds message to incident log 
+	/** 
+	 * adds message to incident log 
 	 * @return number   
 	 */
 	private int addMessageToIncidentLog(String message) {
 		return 0;
 	}
-	/** increments counter */
+	/** 
+	 * increments counter 
+	 */
 	public static void incrementCounter() {
 		
 	}
-	/** sets counter */
+	/** 
+	 * sets counter 
+	 */
 	public static void setCounter(int counter) {
 
 	}
-	/** returns incident log messages 
+	/** 
+	 * returns incident log messages 
 	 * @return messages
 	 */
 	public String getIncidentLogMessages() {
