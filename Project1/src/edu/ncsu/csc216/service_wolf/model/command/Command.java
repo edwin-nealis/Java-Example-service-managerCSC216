@@ -9,6 +9,8 @@ public class Command {
 	private String commandInformation;
 	/** holds command message */
 	private String commandMessage;
+	/** holds command value */
+	private CommandValue cv;
 	/**
 	 * constructor for command
 	 * @param cv command value
@@ -16,6 +18,21 @@ public class Command {
 	 * @param commandMessage message for command
 	 */
 	public Command(CommandValue cv, String commandInformation, String commandMessage) {
+		if (cv == null) {
+			throw new IllegalArgumentException();
+		}
+		if (commandMessage == null || "".equals(commandMessage)) {
+			throw new IllegalArgumentException();
+		}
+		if ((cv == Command.CommandValue.ASSIGN || cv == Command.CommandValue.HOLD || cv == Command.CommandValue.RESOLVE || cv == Command.CommandValue.CANCEL) && (commandInformation == null || "".equals(commandInformation)) ) {
+			throw new IllegalArgumentException();
+		}
+		if ((cv == Command.CommandValue.INVESTIGATE || cv == Command.CommandValue.REOPEN) && commandInformation != null) {
+			throw new IllegalArgumentException();
+		}
+		this.commandInformation = commandInformation;
+		this.commandMessage = commandMessage;
+		this.cv = cv;
 		
 	}
 	/**
@@ -23,21 +40,21 @@ public class Command {
 	 * @return command value
 	 */
 	public CommandValue getCommand() {
-		return null;
+		return cv;
 	}
 	/**
 	 * returns the command information 
 	 * @return string
 	 */
 	public String getCommandInformation() {
-		return null;
+		return commandInformation;
 	}
 	/**
 	 * returns the command message
 	 * @return string
 	 */
 	public String getCommandMessage() {
-		return null;
+		return commandMessage;
 	}
 	/**
 	 * enum with values assign, hold, investigate, resolve, reopen, and cancel.

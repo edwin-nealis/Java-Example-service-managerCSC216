@@ -109,7 +109,7 @@ public class Incident {
 	 * @return id 
 	 */
 	public int getId() {
-		return 0;
+		return incidentId;
 	}
 	/** 
 	 * sets state 
