@@ -36,6 +36,7 @@ public class ServiceGroup {
 				temp = i;
 			}
 		}
+		Incident.setCounter(temp +1); 
 	}
 	/**
 	 * set service group name 
@@ -60,7 +61,17 @@ public class ServiceGroup {
 	 * @param i incident
 	 */
 	public void addIncident(Incident i) {
-		
+		for (int j = 0; j < incidents.size(); j++) {
+			if (i.getId() == incidents.get(j).getId()) {
+				throw new IllegalArgumentException("Incident cannot be created");
+			}
+			if (i.getId() > incidents.get(j).getId()) {
+				incidents.add(j + 1, i);
+			}
+		}
+		if (!incidents.contains(i)) {
+			incidents.add(0, i);
+		}
 	}
 	/**
 	 * returns list of incidents
@@ -83,12 +94,16 @@ public class ServiceGroup {
 		return null;
 	}
 	/**
-	 * does command 
+	 * finds incident with give id and updates it by passing command
 	 * @param id id 
 	 * @param c command
 	 */
 	public void executeCommand(int id, Command c) {
-		
+		for (int i = 0; i < incidents.size(); i++) {
+			if (incidents.get(i).getId() == id) {
+				incidents.get(i).update(c);
+			}
+		}
 	}
 	/**
 	 * deleted incident based on its id

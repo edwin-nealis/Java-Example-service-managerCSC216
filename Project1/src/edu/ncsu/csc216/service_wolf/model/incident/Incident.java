@@ -65,9 +65,21 @@ public class Incident {
 	public static final String NO_STATUS = "No Status";
 	/** counter */
 	private static int counter = 0;
-	
+	/** holds state */
+	private final IncidentState newState = new NewState();
+	/** on hold state */
+	private final IncidentState onHold = new OnHoldState();
+	/** resolved state */
+	private final IncidentState resolved = new ResolvedState();
+	/** canceled state */
+	private final IncidentState canceled = new CanceledState();
+	/** in progess state */
+	private final IncidentState inProgress = new InProgressState();
+	/** holds state */
+	private IncidentState state;
 	/**
-	 * constructor for incident 
+	 * constructor for incident sets id to one more than counter adds messge to messagelog.
+	 * sets status to No status and owener to unowned.
 	 * @param title title of incident 
 	 * @param caller caller 
 	 * @param message log message
@@ -75,6 +87,12 @@ public class Incident {
 	public Incident(String title, String caller, String message) {
 		setTitle(title);
 		setCaller(caller);
+		addMessageToIncidentLog(message);
+		setId(Incident.counter);
+		Incident.incrementCounter();
+		setState(NEW_NAME);
+		setOwner(UNOWNED);
+		setStatusDetails(NO_STATUS);
 	}
 	/**
 	 * constructor for incident with full fields
@@ -89,12 +107,15 @@ public class Incident {
 	 */
 	public Incident(int id, String state, String title, String caller, int reopenCount, String owner, String statusDetails, ArrayList<String> incidentLog) {
 		setId(id);
-		setState(state);
 		setTitle(title);
 		setCaller(caller);
 		setReopenCount(reopenCount);
 		setOwner(owner);
 		setStatusDetails(statusDetails);
+		if (id > Incident.counter) {
+			setCounter(id);
+		}
+		setState(state);
 		
 	}
 	/** 
@@ -102,7 +123,10 @@ public class Incident {
 	 * @param id id
 	 */
 	private void setId(int id) {
-		
+		if (id <= 0) {
+			throw new IllegalArgumentException("Incident cannot be created");
+		}
+		this.incidentId = id;
 	}
 	/** 
 	 * returns id 
@@ -116,112 +140,149 @@ public class Incident {
 	 * @param state state
 	 */
 	private void setState(String state) {
-		
+		if (state.equals(NEW_NAME) && owner.equals(UNOWNED) && statusDetails.equals(NO_STATUS)) {
+			this.state = newState;
+		}
+		else if (state.equals(CANCELED_NAME) && owner.equals(UNOWNED)) {
+			this.state = canceled;
+		}
+		else if (state.equals(IN_PROGRESS_NAME) && statusDetails.equals(NO_STATUS)) {
+			this.state = inProgress;
+		}
+		else if (state.equals(ON_HOLD_NAME)) {
+			this.state = onHold;
+		}
+		else if (state.equals(RESOLVED_NAME)) {
+			this.state = resolved;
+		}
+		else {
+			throw new IllegalArgumentException("Incident cannot be created");
+		}
 	}
 	/** 
 	 * returns state 
 	 * @return state 
 	 */
 	public String getState() {
-		return null;
+		return state.getStateName();
 	}
 	/**
 	 * sets title
 	 * @param title title
 	 */
 	private void setTitle(String title) {
-		
+		if (title == null || "".equals(title)) {
+			throw new IllegalArgumentException("Incident cannot be created");
+		}
+		this.title = title;
 	}
 	/** 
 	 * returns title 
 	 * @return title 
 	 */
 	public String getTitle() {
-		return null;
+		return title;
 	}
 	/** 
 	 * sets caller 
 	 * @param caller caller
 	 */
 	private void setCaller(String caller) {
-	
+		if (caller == null || "".equals(caller)) {
+			throw new IllegalArgumentException("Incident cannot be created");
+		}
+		this.caller = caller;
 	}
 	/** 
 	 * return caller 
 	 * @return caller 
 	 */
 	public String getCaller() {
-		return null;
+		return caller;
 	}
 	/** 
 	 * sets reopen count 
 	 * @param reopenCount num time reopned
 	 */
 	private void setReopenCount(int reopenCount) {
-		
+		if (reopenCount < 0) {
+			throw new IllegalArgumentException("Incident cannot be created");
+		}
+		this.reopenCount = reopenCount;
 	}
 	/** 
 	 * returns reopen count 
 	 * @return reopenCount 
 	 */
 	public int getReopenCount() {
-		return 0;
+		return reopenCount;
 	}
 	/** 
 	 * sets owner 
 	 * @param owner owner
 	 */
 	private void setOwner(String owner) {
-		
+		if (owner == null || "".equals(owner)) {
+			throw new IllegalArgumentException("Incident cannot be created");
+		}
+		this.owner = owner;
 	}
 	/** 
 	 * returns owner 
 	 * @return owner
 	 */
 	public String getOwner() {
-		return null;
+		return owner;
 	}
 	/**
 	 * sets StatusDetails
 	 * @param statusDetails status details
 	 */
 	private void setStatusDetails(String statusDetails) {
-		
+		if (statusDetails == null || "".equals(statusDetails)) {
+			throw new IllegalArgumentException();
+		}
+		this.statusDetails = statusDetails;
 	}
 	/** 
 	 * returns status details 
 	 * @return statusDetails 
 	 */
 	public String getStatusDetails() {
-		return null;
+		return statusDetails;
 	}
 	/** 
 	 * adds message to incident log 
 	 * @param message message
-	 * @return number not sure
+	 * @return index of incident message was added to
 	 */
 	private int addMessageToIncidentLog(String message) {
-		return 0;
+		incidentLog.add(message);
+		return incidentLog.indexOf(message);
 	}
 	/** 
 	 * increments counter 
 	 */
 	public static void incrementCounter() {
-		
+		Incident.counter++;
 	}
 	/** 
 	 * sets counter 
 	 * @param counter counter
 	 */
 	public static void setCounter(int counter) {
-
+		Incident.counter = counter;
 	}
 	/** 
 	 * returns incident log messages 
 	 * @return messages
 	 */
 	public String getIncidentLogMessages() {
-		return null;
+		String logMessages = "";
+		for (int i = 0; i < incidentLog.size(); i++) {
+			logMessages += "- " + incidentLog.get(i) + "\n";
+		}
+		return logMessages;
 	}
 	/** 
 	 * makes fields into string
@@ -229,16 +290,17 @@ public class Incident {
 	 */
 	@Override
 	public String toString() {
-		return "Incident [incidentId=" + incidentId + ", title=" + title + ", caller=" + caller + ", reopenCount="
-				+ reopenCount + ", owner=" + owner + ", statusDetails=" + statusDetails + ", incidentLog=" + incidentLog
-				+ "]";
+		return "* " + incidentId + "," + getState() + "," + title + "," + caller + ","
+				+ reopenCount + "," + owner + "," + statusDetails + "\n" + getIncidentLogMessages();
 	}
 	/**
 	 * updates command
 	 * @param c command
+	 * @throws UnsupportedOperationException
 	 */
 	public void update(Command c) {
-		 
+		addMessageToIncidentLog(c.getCommandMessage());
+		state.updateState(c);
 	}
 	/**
 	 * inner calls that defines the InProgressState contains
@@ -246,7 +308,7 @@ public class Incident {
 	 * @author Edwin Nealis
 	 *
 	 */
-	public class InProgressState {
+	public class InProgressState implements IncidentState{
 		/**
 		 * Constructor for InProgress State
 		 */
@@ -265,7 +327,7 @@ public class Incident {
 		 * @return stateName
 		 */
 		public String getStateName() {
-			return null;
+			return IN_PROGRESS_NAME;
 		}
 	}
 	/**
@@ -274,7 +336,7 @@ public class Incident {
 	 * @author Edwin Nealis
 	 *
 	 */
-	public class CanceledState {
+	public class CanceledState implements IncidentState{
 		/**
 		 * Constructor for Canceled State
 		 */
@@ -293,7 +355,7 @@ public class Incident {
 		 * @return stateName
 		 */
 		public String getStateName() {
-			return null;
+			return CANCELED_NAME;
 		}
 	}
 	/**
@@ -302,7 +364,7 @@ public class Incident {
 	 * @author Edwin Nealis
 	 *
 	 */
-	public class OnHoldState {
+	public class OnHoldState implements IncidentState{
 		/**
 		 * Constructor for On hold State
 		 */
@@ -321,7 +383,7 @@ public class Incident {
 		 * @return stateName
 		 */
 		public String getStateName() {
-			return null;
+			return ON_HOLD_NAME;
 		}
 	}
 	/**
@@ -330,7 +392,7 @@ public class Incident {
 	 * @author Edwin Nealis
 	 *
 	 */
-	public class ResolvedState {
+	public class ResolvedState implements IncidentState {
 		/**
 		 * Constructor for resolved State
 		 */
@@ -349,7 +411,7 @@ public class Incident {
 		 * @return stateName
 		 */
 		public String getStateName() {
-			return null;
+			return RESOLVED_NAME;
 		}
 	}
 	/**
@@ -358,7 +420,7 @@ public class Incident {
 	 * @author Edwin Nealis
 	 *
 	 */
-	public class NewState {
+	public class NewState implements IncidentState {
 		/**
 		 * Constructor for new State
 		 */
@@ -377,7 +439,7 @@ public class Incident {
 		 * @return stateName
 		 */
 		public String getStateName() {
-			return null;
+			return NEW_NAME;
 		}
 	}
 	/**
@@ -406,7 +468,7 @@ public class Incident {
 		 * @return the name of the current state as a String.
 		 */
 		String getStateName();
-
+			
 	}
 	
 }
