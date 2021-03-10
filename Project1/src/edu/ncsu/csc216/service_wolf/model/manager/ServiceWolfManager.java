@@ -51,9 +51,6 @@ public class ServiceWolfManager {
 	public void loadFromFile(String fileName) {
 		serviceGroups = ServiceGroupsReader.readServiceGroupsFile(fileName);
 		currentServiceGroup = serviceGroups.get(0);
-		for (int i = 0; i < serviceGroups.size(); i++) {
-			serviceGroups
-		}
 	}
 	/**
 	 * makes a 2d array containing fields for incident
