@@ -64,7 +64,7 @@ public class Incident {
 	/** no status message */
 	public static final String NO_STATUS = "No Status";
 	/** counter */
-	private static int counter = 0;
+	private static int counter = 1;
 	/** holds state */
 	private final IncidentState newState = new NewState();
 	/** on hold state */
@@ -87,12 +87,14 @@ public class Incident {
 	public Incident(String title, String caller, String message) {
 		setTitle(title);
 		setCaller(caller);
+		incidentLog = new ArrayList<String>();
 		addMessageToIncidentLog(message);
-		setId(Incident.counter);
+		setId(counter);
 		Incident.incrementCounter();
-		setState(NEW_NAME);
 		setOwner(UNOWNED);
 		setStatusDetails(NO_STATUS);
+		setState(NEW_NAME);
+		
 	}
 	/**
 	 * constructor for incident with full fields
@@ -116,7 +118,7 @@ public class Incident {
 			setCounter(id);
 		}
 		setState(state);
-		
+		this.incidentLog = incidentLog;
 	}
 	/** 
 	 * sets Id value 
@@ -257,6 +259,9 @@ public class Incident {
 	 * @return index of incident message was added to
 	 */
 	private int addMessageToIncidentLog(String message) {
+		if (message == null || "".equals(message)) {
+			throw new IllegalArgumentException("Incident cannot be created");
+		}
 		incidentLog.add(message);
 		return incidentLog.indexOf(message);
 	}
@@ -320,6 +325,21 @@ public class Incident {
 		 * @param c command
 		 */
 		public void updateState(Command c) {
+			if (c.getCommand() == Command.CommandValue.HOLD) {
+				state = onHold;
+				addMessageToIncidentLog(c.getCommandInformation());
+			}
+			if (c.getCommand() == Command.CommandValue.RESOLVE) {
+				state = resolved;
+				addMessageToIncidentLog(c.getCommandInformation());
+			}
+			if (c.getCommand() == Command.CommandValue.ASSIGN) {
+				setOwner(c.getCommandInformation());
+			}
+			if (c.getCommand() == Command.CommandValue.CANCEL) {
+				addMessageToIncidentLog(c.getCommandInformation());
+				state = canceled;
+			}
 			
 		}
 		/**
@@ -376,7 +396,10 @@ public class Incident {
 		 * @param c command
 		 */
 		public void updateState(Command c) {
-			
+			if (c.getCommand() == Command.CommandValue.INVESTIGATE) {
+				addMessageToIncidentLog(c.getCommandInformation());
+				state = inProgress;
+			}
 		}
 		/**
 		 * returns state name
@@ -404,7 +427,16 @@ public class Incident {
 		 * @param c command
 		 */
 		public void updateState(Command c) {
-			
+			if (c.getCommand() == Command.CommandValue.REOPEN) {
+				setReopenCount(getReopenCount() + 1);
+				state = inProgress;
+				incidentLog.remove(incidentLog.size());
+			}
+			if (c.getCommand() == Command.CommandValue.CANCEL) {
+				state = canceled;
+				incidentLog.remove(incidentLog.size());
+				setOwner(UNOWNED);
+			}
 		}
 		/**
 		 * returns state name
@@ -432,7 +464,15 @@ public class Incident {
 		 * @param c command
 		 */
 		public void updateState(Command c) {
-			
+			if (c.getCommand() == Command.CommandValue.CANCEL) {
+				state = canceled;
+			}
+			if (c.getCommand() == Command.CommandValue.ASSIGN) {
+				setOwner(c.getCommandInformation());
+			}
+			if (c.getCommand() == Command.CommandValue.INVESTIGATE) {
+				state = inProgress;
+			}
 		}
 		/**
 		 * returns state name

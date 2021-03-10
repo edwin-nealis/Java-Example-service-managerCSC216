@@ -19,7 +19,7 @@ public class IncidentTest {
 	@Before
 	public void setUp() throws Exception {
 		//Reset the counter at the beginning of every test.
-		Incident.setCounter(0);
+		Incident.setCounter(1);
 	}
 	/**
 	 * tests the Incident constructor
@@ -41,6 +41,7 @@ public class IncidentTest {
 		i3 = null;
 		try {
 			i3 = new Incident("title", null, "message");
+			fail();
 		}
 		catch (IllegalArgumentException e) {
 			assertNull(i3);
@@ -48,6 +49,7 @@ public class IncidentTest {
 		i4 = null;
 		try {
 			i4 = new Incident("title", "caller", null);
+			fail();
 		}
 		catch (IllegalArgumentException e) {
 			assertNull(i4);
@@ -55,20 +57,19 @@ public class IncidentTest {
 		
 		assertEquals(i1.getTitle(), "title");
 		assertEquals(i1.getCaller(), "caller");
-		assertEquals(i1.getIncidentLogMessages(), "message");
-		assertEquals(i1.getState(), "NO_STATUS");
-		assertEquals(i1.getOwner(), "UNOWNED");
+		assertEquals(i1.getState(), "New");
+		assertEquals(i1.getOwner(), "Unowned");
 		ArrayList<String> list = new ArrayList<String>();
 		list.add("abc");
-		Incident i5 = new Incident(1, "New", "title", "caller", 0, "Unowned", "statusDetails", list);
+		Incident i5 = new Incident(1, "New", "title", "caller", 0, "Unowned", Incident.NO_STATUS, list);
 		assertEquals(i5.getId(), 1);
 		assertEquals(i5.getState(), "New");
 		assertEquals(i5.getTitle(), "title");
-		assertEquals(i5.getCaller(), "Caller");
+		assertEquals(i5.getCaller(), "caller");
 		assertEquals(i5.getReopenCount(), 0);
-		assertEquals(i5.getOwner(), "owner");
-		assertEquals(i5.getStatusDetails(), "statusDetails");
-		assertEquals(i5.getIncidentLogMessages(), "abc");
+		assertEquals(i5.getOwner(), "Unowned");
+		assertEquals(i5.getStatusDetails(), Incident.NO_STATUS);
+		assertEquals(i5.getIncidentLogMessages(), "- abc\n");
 		
 	}
 
