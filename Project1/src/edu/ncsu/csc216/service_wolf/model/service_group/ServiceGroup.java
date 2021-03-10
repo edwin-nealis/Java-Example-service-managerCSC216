@@ -61,15 +61,19 @@ public class ServiceGroup {
 	 * @param i incident
 	 */
 	public void addIncident(Incident i) {
-		for (int j = 0; j < incidents.size(); j++) {
+		int a = incidents.size();
+		for (int j = 0; j < a; j++) {
 			if (i.getId() == incidents.get(j).getId()) {
 				throw new IllegalArgumentException("Incident cannot be created");
 			}
-			if (i.getId() > incidents.get(j).getId()) {
-				incidents.add(j + 1, i);
+			if (i.getId() < incidents.get(j).getId()) {
+				incidents.add(j, i);
 			}
 		}
-		if (!incidents.contains(i)) {
+		if (!incidents.contains(i) && a != 0) {
+			incidents.add(a, i);
+		}
+		if (!incidents.contains(i) && a == 0) {
 			incidents.add(0, i);
 		}
 	}

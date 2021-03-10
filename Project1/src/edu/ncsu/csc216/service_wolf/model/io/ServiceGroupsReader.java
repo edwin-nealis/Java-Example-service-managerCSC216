@@ -27,17 +27,17 @@ public class ServiceGroupsReader {
 	 */
 	public static ArrayList<ServiceGroup> readServiceGroupsFile(String fileName) {
 			ArrayList<ServiceGroup> serviceGroups = new ArrayList<ServiceGroup>();
-			String file ="";
+			String file = "";
 			String serviceGroupToken;
 			try {
 			Scanner input = new Scanner(new FileInputStream(fileName));
-			while(input.hasNextLine()) {
-				file = input.nextLine() + "\n";
+			while(input.hasNext()) {
+				file += input.nextLine() + "\n";
 			}
 			Scanner serviceGroup = new Scanner(file);
 			serviceGroup.useDelimiter("\\r?\\n?[#]");
-			while (serviceGroup.hasNextLine()) {
-				serviceGroupToken = serviceGroup.nextLine();
+			while (serviceGroup.hasNext()) {
+				serviceGroupToken = serviceGroup.next();
 				ServiceGroup serviceGroupObj = processServiceGroup(serviceGroupToken);
 				serviceGroups.add(serviceGroupObj);
 			}
@@ -46,7 +46,7 @@ public class ServiceGroupsReader {
 			catch (FileNotFoundException e) {
 				throw new IllegalArgumentException("Unable to load file.");
 			}
-		return null;
+		return serviceGroups;
 	}
 	/**
 	 * helper method that takes a string and creates a service group
@@ -57,11 +57,14 @@ public class ServiceGroupsReader {
 		String incident;
 		String serviceGroupName;
 		Scanner input = new Scanner(string);
-		serviceGroupName = input.nextLine();
+		input.useDelimiter("\\r?\\n?[*]");
+		serviceGroupName = input.next();
+		serviceGroupName = serviceGroupName.substring(1);
+		serviceGroupName = serviceGroupName.trim();
 		ServiceGroup serviceGroup = new ServiceGroup(serviceGroupName);
-		while(input.hasNextLine()) {
-			input.useDelimiter("\\r?\\n?[*]");
-			incident = input.nextLine();
+		while(input.hasNext()) {
+			incident = input.next();
+			incident = incident.trim();
 			Incident i = processIncident(incident);
 			serviceGroup.addIncident(i);
 		}
@@ -82,20 +85,19 @@ public class ServiceGroupsReader {
 		String owner;
 		String statusDetails;
 		ArrayList<String> incidentLog = new ArrayList<String>();
-		string = string.substring(1);
-		string = string.trim();
 		Scanner in = new Scanner(string);
 		in.useDelimiter(",");
 		id = in.nextInt();
-		state = in.nextLine();
-		title = in.nextLine();
-		caller = in.nextLine();
+		state = in.next();
+		title = in.next();
+		caller = in.next();
 		reopenCount = in.nextInt();
-		owner = in.nextLine();
+		owner = in.next();
 		statusDetails = in.nextLine();
+		statusDetails = statusDetails.substring(1);
 		in.useDelimiter("\\r?\\n?[-]");
-		while (in.hasNextLine()) {
-			String logMessage = in.nextLine();
+		while (in.hasNext()) {
+			String logMessage = in.next();
 			logMessage = logMessage.substring(1);
 			logMessage = logMessage.trim();
 			incidentLog.add(logMessage);

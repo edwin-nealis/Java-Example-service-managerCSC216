@@ -58,25 +58,28 @@ public class ServiceWolfManager {
 	 * @return 2d string array
 	 */
 	public String[][] getIncidentsAsArray() {
-		int a = currentServiceGroup.getIncidents().size();
-		String[][] array = new String[a][4];
-		for (int i = 0; i < a; i++) {
-			for (int j = 0; j < array[a].length; i++) {
-				if (j == 0) {
+		if (currentServiceGroup != null) {
+			int a = currentServiceGroup.getIncidents().size();
+			String[][] array = new String[a][4];
+			for (int i = 0; i < a; i++) {
+				for (int j = 0; j < array[a].length; i++) {
+					if (j == 0) {
 					array[i][0] = String.valueOf(currentServiceGroup.getIncidents().get(i).getId());
-				}
-				if (j == 1) {
+					}
+					if (j == 1) {
 					array[i][1] = currentServiceGroup.getIncidents().get(i).getState();
-				}
-				if (j == 2) {
+					}
+					if (j == 2) {
 					array[i][2] = currentServiceGroup.getIncidents().get(i).getTitle();
-				}
-				if (j == 3) {
+					}
+					if (j == 3) {
 					array[i][3] = currentServiceGroup.getIncidents().get(i).getStatusDetails();
+					}
 				}
 			}
-		}
 		return array;
+		}
+		return null;
 	}
 	/**
 	 * returns incident specified by id
@@ -84,8 +87,11 @@ public class ServiceWolfManager {
 	 * @return Incident
 	 */
 	public Incident getIncidentById(int id) {
-		Incident i = currentServiceGroup.getIncidentById(id);
-		return i;
+		if (currentServiceGroup != null) {
+			Incident i = currentServiceGroup.getIncidentById(id);
+			return i;
+		}
+		return null;
 	}
 	/**
 	 * passes incident give by id and passes it to command
@@ -93,14 +99,18 @@ public class ServiceWolfManager {
 	 * @param c command
 	 */
 	public void executeCommand(int id, Command c) {
-		currentServiceGroup.executeCommand(id, c);
+		if (currentServiceGroup != null) {
+			currentServiceGroup.executeCommand(id, c);
+		}
 	}
 	/**
 	 * Deletes incident by specified id
 	 * @param id id
 	 */
 	public void deleteIncidentById(int id) {
-		currentServiceGroup.deleteIncidentById(id);
+		if (currentServiceGroup != null) {
+			currentServiceGroup.deleteIncidentById(id);
+		}
 	}
 	/**
 	 * adds an incident to the current service group
@@ -109,8 +119,10 @@ public class ServiceWolfManager {
 	 * @param message message for log
 	 */
 	public void addIncidentToServiceGroup(String title, String caller, String message) {
-		Incident i = new Incident(title, caller, message);
-		currentServiceGroup.addIncident(i);
+		if (currentServiceGroup != null) {
+			Incident i = new Incident(title, caller, message);
+			currentServiceGroup.addIncident(i);
+		}
 	}
 	/**
 	 * loads a service group
@@ -128,7 +140,10 @@ public class ServiceWolfManager {
 	 * @return name
 	 */
 	public String getServiceGroupName() {
-		return currentServiceGroup.getServiceGroupName();
+		if (currentServiceGroup != null) {
+			return currentServiceGroup.getServiceGroupName();
+		}
+		return null;
 	}
 	/**
 	 * returns a string array for the service groups
@@ -164,9 +179,12 @@ public class ServiceWolfManager {
 			if (serviceGroups.get(i).getServiceGroupName().compareToIgnoreCase(sg.getServiceGroupName()) > 0) {
 				serviceGroups.add(i + 1, sg);
 			}
-			if (!serviceGroups.contains(sg)) {
-				serviceGroups.add(0, sg);
-			}
+		}
+		if (!serviceGroups.contains(sg) && serviceGroups.size() == 0) {
+			serviceGroups.add(0, sg);
+		}
+		if (!serviceGroups.contains(sg) && serviceGroups.size() != 0) {
+			serviceGroups.add(serviceGroups.size(), sg);
 		}
 	}
 	/**
