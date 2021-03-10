@@ -9,6 +9,7 @@ import java.util.Scanner;
 
 import org.junit.Test;
 
+import edu.ncsu.csc216.service_wolf.model.incident.Incident;
 import edu.ncsu.csc216.service_wolf.model.service_group.ServiceGroup;
 
 /**
@@ -17,6 +18,8 @@ import edu.ncsu.csc216.service_wolf.model.service_group.ServiceGroup;
  *
  */
 public class ServiceGroupsReaderTest {
+	/** export file path */
+	private final String export = "test-files/export.txt";
 	/** valid file path */
 	private final String validFile = "test-files/incidents1.txt";
 	/** expected for valid incident CSC IT 2*/
@@ -63,7 +66,9 @@ public class ServiceGroupsReaderTest {
 	 */
 	@Test
 	public void testReadServiceGroupsFile() {
-		fail("Not yet implemented");
+		ArrayList<ServiceGroup> sg = ServiceGroupsReader.readServiceGroupsFile(validFile);
+		ServiceGroupWriter.writeServiceGroupsToFile(export, sg);
+		checkFiles(export, validFile);
 	}
 	/**
 	 * Helper method to compare two files for the same contents
