@@ -368,7 +368,7 @@ public class Incident {
 		 * @param c command
 		 */
 		public void updateState(Command c) {
-			
+			state = canceled;
 		}
 		/**
 		 * returns state name
