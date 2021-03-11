@@ -37,6 +37,11 @@ public class ServiceGroupsWriterTest {
 			ArrayList<ServiceGroup> sg = ServiceGroupsReader.readServiceGroupsFile(validFile);
 			ServiceGroupWriter.writeServiceGroupsToFile(export, sg);
 			checkFiles(export, validFile);
+			try {
+				ServiceGroupWriter.writeServiceGroupsToFile(export, sg);
+			} catch (IllegalArgumentException e) {
+				fail("Cannot write to course records file");
+			}
 		}
 		/**
 		 * Helper method to compare two files for the same contents
