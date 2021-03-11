@@ -18,8 +18,6 @@ import edu.ncsu.csc216.service_wolf.model.service_group.ServiceGroup;
  *
  */
 public class ServiceGroupsReaderTest {
-	/** export file path */
-	private final String export = "test-files/export.txt";
 	/** valid file path */
 	private final String validFile = "test-files/incidents1.txt";
 	/** expected for valid incident CSC IT 2*/
@@ -61,34 +59,6 @@ public class ServiceGroupsReaderTest {
 			assertEquals(sg.get(1).getIncidents().get(0).toString(), itecs);
 
 	}
-	/**
-	 * tests read service groups file method
-	 */
-	@Test
-	public void testReadServiceGroupsFile() {
-		ArrayList<ServiceGroup> sg = ServiceGroupsReader.readServiceGroupsFile(validFile);
-		ServiceGroupWriter.writeServiceGroupsToFile(export, sg);
-		checkFiles(export, validFile);
-	}
-	/**
-	 * Helper method to compare two files for the same contents
-	 * 
-	 * @param expFile expected output
-	 * @param actFile actual output
-	 */
-	private void checkFiles(String expFile, String actFile) {
-		try (Scanner expScanner = new Scanner(new FileInputStream(expFile));
-				Scanner actScanner = new Scanner(new FileInputStream(actFile));) {
 
-			while (expScanner.hasNextLine()) {
-				assertEquals(expScanner.nextLine(), actScanner.nextLine());
-			}
-
-			expScanner.close();
-			actScanner.close();
-		} catch (IOException e) {
-			fail("Error reading files.");
-		}
-	}
 
 }
