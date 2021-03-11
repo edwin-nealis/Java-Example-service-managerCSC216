@@ -5,6 +5,7 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
+import edu.ncsu.csc216.service_wolf.model.incident.Incident;
 import edu.ncsu.csc216.service_wolf.model.service_group.ServiceGroup;
 /**
  * test service wolf manager class
@@ -20,6 +21,7 @@ public class ServiceWolfManagerTest {
 	@Before
 	public void setUp() {
 		instance = ServiceWolfManager.getInstance();
+		Incident.setCounter(1);
 	}
 	
 	/**
@@ -62,7 +64,17 @@ public class ServiceWolfManagerTest {
 	 */
 	@Test
 	public void testDeleteIncidentById() {
-		fail("Not yet implemented");
+		instance.addServiceGroup("sg");
+		instance.loadServiceGroup("sg");
+		assertEquals(instance.getServiceGroupName(), "sg");
+		instance.addIncidentToServiceGroup("title", "caller", "message");
+		instance.addIncidentToServiceGroup("title2", "caller2", "message");
+		assertEquals(instance.getIncidentById(1).getTitle(), "title");
+		assertEquals(instance.getIncidentById(2).getCaller(), "caller2");
+		instance.deleteIncidentById(2);
+		assertEquals(instance.getIncidentById(1).getTitle(), "title");
+		assertNull(instance.getIncidentById(2));
+		
 	}
 
 	/**
