@@ -6,6 +6,8 @@ import java.util.ArrayList;
 
 import org.junit.Before;
 import org.junit.Test;
+
+import edu.ncsu.csc216.service_wolf.model.command.Command;
 /**
  * tests the incindent class
  * @author edwin
@@ -71,6 +73,26 @@ public class IncidentTest {
 		assertEquals(i5.getOwner(), "Unowned");
 		assertEquals(i5.getStatusDetails(), Incident.NO_STATUS);
 		assertEquals(i5.getIncidentLogMessages(), "- abc\n");
+		
+	}
+	
+	@Test
+	public void testIncidentState() {
+		Incident i1 = new Incident("title", "caller", "message");
+		assertEquals(i1.getState(), "New");
+		Command c = new Command(Command.CommandValue.ASSIGN, "info", "message");
+		i1.update(c);
+		assertEquals(i1.getState(), Incident.IN_PROGRESS_NAME);
+		assertEquals(i1.getOwner(), "info");
+		Command c2 = new Command(Command.CommandValue.RESOLVE, "Permanently Solved", "message");
+		i1.update(c2);
+		assertEquals(i1.getState(), Incident.RESOLVED_NAME);
+		assertEquals(i1.getStatusDetails(), "Permanently Solved");
+		Command c3 = new Command(Command.CommandValue.REOPEN, null, "message1");
+		i1.update(c3);
+		assertEquals(i1.getState(), Incident.IN_PROGRESS_NAME);
+		assertEquals(i1.getStatusDetails(), Incident.NO_STATUS);
+		
 		
 	}
 

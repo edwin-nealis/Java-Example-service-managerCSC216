@@ -331,7 +331,7 @@ public class Incident {
 			}
 			if (c.getCommand() == Command.CommandValue.RESOLVE) {
 				state = resolved;
-				addMessageToIncidentLog(c.getCommandInformation());
+				setStatusDetails(c.getCommandInformation());
 			}
 			if (c.getCommand() == Command.CommandValue.ASSIGN) {
 				setOwner(c.getCommandInformation());
@@ -430,7 +430,7 @@ public class Incident {
 			if (c.getCommand() == Command.CommandValue.REOPEN) {
 				setReopenCount(getReopenCount() + 1);
 				state = inProgress;
-				incidentLog.remove(incidentLog.size());
+				setStatusDetails(Incident.NO_STATUS);
 			}
 			if (c.getCommand() == Command.CommandValue.CANCEL) {
 				state = canceled;
@@ -469,6 +469,7 @@ public class Incident {
 			}
 			if (c.getCommand() == Command.CommandValue.ASSIGN) {
 				setOwner(c.getCommandInformation());
+				state = inProgress;
 			}
 			if (c.getCommand() == Command.CommandValue.INVESTIGATE) {
 				state = inProgress;
