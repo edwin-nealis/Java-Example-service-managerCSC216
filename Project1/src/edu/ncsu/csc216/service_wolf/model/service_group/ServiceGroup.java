@@ -33,7 +33,7 @@ public class ServiceGroup {
 		int temp = 0;
 		for (int i = 0; i < incidents.size(); i++) {
 			if (incidents.get(i).getId() > temp) {
-				temp = i;
+				temp = incidents.get(i).getId();
 			}
 		}
 		Incident.setCounter(temp +1); 
