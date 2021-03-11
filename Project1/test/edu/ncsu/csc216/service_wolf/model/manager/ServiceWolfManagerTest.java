@@ -2,13 +2,26 @@ package edu.ncsu.csc216.service_wolf.model.manager;
 
 import static org.junit.Assert.*;
 
+import org.junit.Before;
 import org.junit.Test;
+
+import edu.ncsu.csc216.service_wolf.model.service_group.ServiceGroup;
 /**
  * test service wolf manager class
  * @author edwin
  *
  */
 public class ServiceWolfManagerTest {
+	/** instance of manager */
+	ServiceWolfManager instance;
+	/** valid test file */
+	private final String validFile = "test-files/incidents1.txt";
+	
+	@Before
+	public void setUp() {
+		instance = ServiceWolfManager.getInstance();
+	}
+	
 	/**
 	 * test save to file method
 	 */
@@ -21,7 +34,12 @@ public class ServiceWolfManagerTest {
 	 */
 	@Test
 	public void testLoadFromFile() {
-		fail("Not yet implemented");
+		instance.loadFromFile(validFile);
+		assertEquals(instance.getServiceGroupName(), "CSC IT");
+		assertEquals(instance.getIncidentById(3).getTitle(), "Moodle down");
+		assertEquals(instance.getIncidentById(3).getState(), "New");
+		assertEquals(instance.getIncidentById(3).getCaller(), "sesmith5");
+		instance.resetManager();
 	}
 
 	/**
@@ -29,13 +47,6 @@ public class ServiceWolfManagerTest {
 	 */
 	@Test
 	public void testGetIncidentsAsArray() {
-		fail("Not yet implemented");
-	}
-	/**
-	 * test get incident by id method
-	 */
-	@Test
-	public void testGetIncidentById() {
 		fail("Not yet implemented");
 	}
 	
@@ -67,7 +78,10 @@ public class ServiceWolfManagerTest {
 	 */
 	@Test
 	public void testLoadServiceGroup() {
-		fail("Not yet implemented");
+		instance.addServiceGroup("sg");
+		instance.loadServiceGroup("sg");
+		assertEquals(instance.getServiceGroupName(), "sg");
+		instance.resetManager();
 	}
 
 	/**
@@ -75,7 +89,10 @@ public class ServiceWolfManagerTest {
 	 */
 	@Test
 	public void testClearServiceGroups() {
-		fail("Not yet implemented");
+		instance.loadFromFile(validFile);
+		instance.clearServiceGroups();
+		assertNull(instance.getServiceGroupName());
+		instance.resetManager();
 	}
 
 	/**
@@ -83,29 +100,26 @@ public class ServiceWolfManagerTest {
 	 */
 	@Test
 	public void testEditServiceGroup() {
-		fail("Not yet implemented");
+		instance.loadFromFile(validFile);
+		instance.editServiceGroup("ZSZ IT");
+		String[] temp = new String[] {"ITECS", "OIT", "ZSZ IT"};
+		assertEquals(instance.getServiceGroupList()[0], temp[0]);
+		assertEquals(instance.getServiceGroupList()[1], temp[1]);
+		assertEquals(instance.getServiceGroupList()[2], temp[2]);
 	}
 
-	/**
-	 * tests add service group method
-	 */
-	@Test
-	public void testAddServiceGroup() {
-		fail("Not yet implemented");
-	}
 	/**
 	 * tests delete service group method
 	 */
 	@Test
 	public void testDeleteServiceGroup() {
-		fail("Not yet implemented");
+		instance.addServiceGroup("sg");
+		instance.loadServiceGroup("sg");
+		assertEquals(instance.getServiceGroupName(), "sg");
+		instance.deleteServiceGroup();
+		assertNull(instance.getServiceGroupName());
+		instance.resetManager();
 	}
-	/**
-	 * tests rest manager mehtod
-	 */
-	@Test
-	public void testResetManager() {
-		fail("Not yet implemented");
-	}
+
 
 }

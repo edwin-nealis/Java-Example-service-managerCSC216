@@ -269,7 +269,7 @@ public class Incident {
 	 * increments counter 
 	 */
 	public static void incrementCounter() {
-		Incident.counter++;
+		Incident.counter = Incident.counter + 1;
 	}
 	/** 
 	 * sets counter 

@@ -59,6 +59,7 @@ public class IncidentTest {
 		assertEquals(i1.getCaller(), "caller");
 		assertEquals(i1.getState(), "New");
 		assertEquals(i1.getOwner(), "Unowned");
+		assertEquals(i1.getId(), 1);
 		ArrayList<String> list = new ArrayList<String>();
 		list.add("abc");
 		Incident i5 = new Incident(1, "New", "title", "caller", 0, "Unowned", Incident.NO_STATUS, list);

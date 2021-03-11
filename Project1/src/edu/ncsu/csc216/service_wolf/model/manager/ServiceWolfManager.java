@@ -6,6 +6,7 @@ import java.util.ArrayList;
 
 import edu.ncsu.csc216.service_wolf.model.command.Command;
 import edu.ncsu.csc216.service_wolf.model.incident.Incident;
+import edu.ncsu.csc216.service_wolf.model.io.ServiceGroupWriter;
 import edu.ncsu.csc216.service_wolf.model.io.ServiceGroupsReader;
 import edu.ncsu.csc216.service_wolf.model.service_group.ServiceGroup;
 /**
@@ -17,7 +18,7 @@ import edu.ncsu.csc216.service_wolf.model.service_group.ServiceGroup;
  */
 public class ServiceWolfManager {
 	/** array list of service groups */
-	private ArrayList<ServiceGroup> serviceGroups = new ArrayList<ServiceGroup>();
+	private ArrayList<ServiceGroup> serviceGroups;
 	/** the instance of the registration manager */
 	private static ServiceWolfManager instance;
 	/** current service group */
@@ -26,7 +27,8 @@ public class ServiceWolfManager {
 	 * constructor for service wolf manager
 	 */
 	private ServiceWolfManager() {
-		
+		serviceGroups = new ArrayList<ServiceGroup>();
+		currentServiceGroup = null;
 	}
 	/**
 	 * gets the instance for service wolf manager 
@@ -43,7 +45,10 @@ public class ServiceWolfManager {
 	 * @param fileName file name
 	 */
 	public void saveToFile(String fileName) {
-		
+		if (currentServiceGroup == null || currentServiceGroup.getIncidents().size() == 0) {
+			throw new IllegalArgumentException("Unable to save file.");
+		}
+		ServiceGroupWriter.writeServiceGroupsToFile(fileName, serviceGroups);
 	}
 	/**
 	 * load from file name
@@ -162,13 +167,18 @@ public class ServiceWolfManager {
 	 */
 	public void clearServiceGroups() {
 		serviceGroups = new ArrayList<ServiceGroup>();
+		currentServiceGroup = null;
 	}
 	/**
 	 * edits the service group 
 	 * @param temp temp
 	 */
 	public void editServiceGroup(String temp) {
-		
+		checkDuplicateServiceName(temp);
+		currentServiceGroup.setServiceGroupName(temp);
+		ServiceGroup temp2 = serviceGroups.remove(serviceGroups.indexOf(currentServiceGroup));
+		addServiceGroupToListByName(temp2);
+		loadServiceGroup(temp);
 	}
 	/**
 	 * adds service group to the list by its specified name
@@ -234,6 +244,6 @@ public class ServiceWolfManager {
 	 * Resets the manager
 	 */
 	protected void resetManager() {
-		serviceGroups = new ArrayList<ServiceGroup>();
+		instance = null;
 	}
 }

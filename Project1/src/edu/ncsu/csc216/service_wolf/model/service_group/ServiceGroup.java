@@ -114,7 +114,7 @@ public class ServiceGroup {
 	 * @param id id
 	 */
 	public void deleteIncidentById(int id) {
-		for (int i =0 ; i < incidents.size(); i++) {
+		for (int i = 0 ; i < incidents.size(); i++) {
 			if (incidents.get(i).getId() == id) {
 				incidents.remove(i);
 			}
