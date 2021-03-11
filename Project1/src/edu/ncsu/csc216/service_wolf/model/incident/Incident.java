@@ -327,7 +327,7 @@ public class Incident {
 		public void updateState(Command c) {
 			if (c.getCommand() == Command.CommandValue.HOLD) {
 				state = onHold;
-				addMessageToIncidentLog(c.getCommandInformation());
+				setStatusDetails(c.getCommandInformation());
 			}
 			if (c.getCommand() == Command.CommandValue.RESOLVE) {
 				state = resolved;
@@ -397,7 +397,7 @@ public class Incident {
 		 */
 		public void updateState(Command c) {
 			if (c.getCommand() == Command.CommandValue.INVESTIGATE) {
-				addMessageToIncidentLog(c.getCommandInformation());
+				setStatusDetails(Incident.NO_STATUS);
 				state = inProgress;
 			}
 		}

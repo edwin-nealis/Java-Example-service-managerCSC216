@@ -92,6 +92,14 @@ public class IncidentTest {
 		i1.update(c3);
 		assertEquals(i1.getState(), Incident.IN_PROGRESS_NAME);
 		assertEquals(i1.getStatusDetails(), Incident.NO_STATUS);
+		Command c4 = new Command(Command.CommandValue.HOLD, "Awaiting Caller", "message1");
+		i1.update(c4);
+		assertEquals(i1.getState(), Incident.ON_HOLD_NAME);
+		assertEquals(i1.getStatusDetails(), "Awaiting Caller");
+		Command c5 = new Command(Command.CommandValue.INVESTIGATE, null, "message1");
+		i1.update(c5);
+		assertEquals(i1.getState(), Incident.IN_PROGRESS_NAME);
+		assertEquals(i1.getStatusDetails(), Incident.NO_STATUS);
 		
 		
 	}
