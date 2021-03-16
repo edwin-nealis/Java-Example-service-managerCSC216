@@ -309,8 +309,8 @@ public class Incident {
 	 * @throws UnsupportedOperationException
 	 */
 	public void update(Command c) {
-		addMessageToIncidentLog(c.getCommandMessage());
 		state.updateState(c);
+		addMessageToIncidentLog(c.getCommandMessage());
 	}
 	/**
 	 * inner calls that defines the InProgressState contains
@@ -335,7 +335,7 @@ public class Incident {
 				state = onHold;
 				setStatusDetails(c.getCommandInformation());
 			}
-			else if (c.getCommand() == Command.CommandValue.RESOLVE && (c.getCommandInformation().equals(RESOLUTION_CALLER_CLOSED) || c.getCommandInformation().equals(RESOLUTION_PERMANENTLY_SOLVED) || c.getCommandInformation().equals(RESOLUTION_CALLER_CLOSED))) {
+			else if (c.getCommand() == Command.CommandValue.RESOLVE && (c.getCommandInformation().equals(RESOLUTION_CALLER_CLOSED) || c.getCommandInformation().equals(RESOLUTION_PERMANENTLY_SOLVED) || c.getCommandInformation().equals(RESOLUTION_WORKAROUND))) {
 				state = resolved;
 				setStatusDetails(c.getCommandInformation());
 			}
