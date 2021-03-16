@@ -45,7 +45,8 @@ public class ServiceGroupsReader {
 				try {
 				serviceGroupToken = serviceGroup.next();
 				ServiceGroup serviceGroupObj = processServiceGroup(serviceGroupToken);
-				serviceGroups.add(serviceGroupObj);
+				if (!serviceGroupObj.getIncidents().isEmpty())
+					serviceGroups.add(serviceGroupObj);
 				}
 				catch (IllegalArgumentException e) {
 					if (count == 1) {
