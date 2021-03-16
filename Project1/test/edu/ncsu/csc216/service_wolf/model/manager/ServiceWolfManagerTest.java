@@ -63,14 +63,6 @@ public class ServiceWolfManagerTest {
 	}
 
 	/**
-	 * test add incident to service group
-	 */
-	@Test
-	public void testAddIncidentToServiceGroup() {
-		fail("Not yet implemented");
-	}
-
-	/**
 	 * tests load service group method
 	 */
 	@Test
