@@ -65,13 +65,9 @@ public class ServiceGroupsReaderTest {
 	public void testServiceGroupReaderInValid() {
 		ArrayList<ServiceGroup> sg = null;
 		for (int i = 6; i < 28; i++) {
-			try {
 				sg = ServiceGroupsReader.readServiceGroupsFile("test-files/incidents" + i + ".txt");
-				fail("incidents " + i + " failed");
-			}
-			catch (IllegalArgumentException e) {
-				assertNull(sg);
-			}
+				assertTrue(sg.isEmpty());
+		
 		}
 	}
 		

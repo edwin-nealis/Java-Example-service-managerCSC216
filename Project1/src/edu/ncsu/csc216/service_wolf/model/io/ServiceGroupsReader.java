@@ -39,10 +39,15 @@ public class ServiceGroupsReader {
 			}
 			Scanner serviceGroup = new Scanner(file);
 			serviceGroup.useDelimiter("\\r?\\n?[#]");
-			while (serviceGroup.hasNext()) {
+				while (serviceGroup.hasNext()) {
+					try {
 				serviceGroupToken = serviceGroup.next();
-					ServiceGroup serviceGroupObj = processServiceGroup(serviceGroupToken);
+				ServiceGroup serviceGroupObj = processServiceGroup(serviceGroupToken);
 				serviceGroups.add(serviceGroupObj);
+				}
+				catch (IllegalArgumentException e) {
+					//intinonally blank
+				}
 			}
 			serviceGroup.close();
 			}
@@ -76,7 +81,7 @@ public class ServiceGroupsReader {
 		}
 		serviceGroupName = serviceGroupName.substring(1);
 		serviceGroupName = serviceGroupName.trim();
-			ServiceGroup serviceGroup = new ServiceGroup(serviceGroupName);
+		ServiceGroup serviceGroup = new ServiceGroup(serviceGroupName);
 		try {
 			while(input.hasNext()) {
 			incident = input.next();
