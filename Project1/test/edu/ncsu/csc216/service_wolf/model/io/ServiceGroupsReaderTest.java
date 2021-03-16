@@ -64,7 +64,7 @@ public class ServiceGroupsReaderTest {
 	@Test
 	public void testServiceGroupReaderInValid() {
 		ArrayList<ServiceGroup> sg = null;
-		for (int i = 6; i < 28; i++) {
+		for (int i = 4; i < 28; i++) {
 				sg = ServiceGroupsReader.readServiceGroupsFile("test-files/incidents" + i + ".txt");
 				assertTrue(sg.isEmpty());
 		

@@ -37,6 +37,9 @@ public class ServiceGroupsReader {
 			while(input.hasNext()) {
 				file += input.nextLine() + "\n";
 			}
+			if (!file.substring(0, 1).equals("#")) {
+				return serviceGroups;
+			}
 			Scanner serviceGroup = new Scanner(file);
 			serviceGroup.useDelimiter("\\r?\\n?[#]");
 			int count = 0;	
@@ -80,7 +83,10 @@ public class ServiceGroupsReader {
 			input.close();
 			throw new IllegalArgumentException();
 		}
-
+		if (serviceGroupName.contains("*")) {
+			input.close();
+			throw new IllegalArgumentException();
+		}
 		serviceGroupName = serviceGroupName.substring(1);
 		serviceGroupName = serviceGroupName.trim();
 		ServiceGroup serviceGroup = new ServiceGroup(serviceGroupName);
