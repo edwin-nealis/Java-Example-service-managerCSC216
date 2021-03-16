@@ -59,6 +59,9 @@ public class ServiceGroupsReaderTest {
 			assertEquals(sg.get(0).getIncidents().get(3).toString(), cscIt9);
 			assertEquals(sg.get(2).getIncidents().get(0).toString(), oit);
 			assertEquals(sg.get(1).getIncidents().get(0).toString(), itecs);
+			sg = ServiceGroupsReader.readServiceGroupsFile("test-files/incidents2.txt");
+			assertEquals(sg.size(), 4);
+			
 
 	}
 	@Test

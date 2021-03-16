@@ -328,22 +328,26 @@ public class Incident {
 		/**
 		 * updates state 
 		 * @param c command
+		 * @throws UnsupportedOperationException if command is invalid
 		 */
 		public void updateState(Command c) {
-			if (c.getCommand() == Command.CommandValue.HOLD) {
+			if (c.getCommand() == Command.CommandValue.HOLD && (c.getCommandInformation().equals(HOLD_AWAITING_CALLER) || c.getCommandInformation().equals(HOLD_AWAITING_CHANGE) || c.getCommandInformation().equals(HOLD_AWAITING_VENDOR))) {
 				state = onHold;
 				setStatusDetails(c.getCommandInformation());
 			}
-			if (c.getCommand() == Command.CommandValue.RESOLVE) {
+			else if (c.getCommand() == Command.CommandValue.RESOLVE && (c.getCommandInformation().equals(RESOLUTION_CALLER_CLOSED) || c.getCommandInformation().equals(RESOLUTION_PERMANENTLY_SOLVED) || c.getCommandInformation().equals(RESOLUTION_CALLER_CLOSED))) {
 				state = resolved;
 				setStatusDetails(c.getCommandInformation());
 			}
-			if (c.getCommand() == Command.CommandValue.ASSIGN) {
+			else if (c.getCommand() == Command.CommandValue.ASSIGN) {
 				setOwner(c.getCommandInformation());
 			}
-			if (c.getCommand() == Command.CommandValue.CANCEL) {
+			else if (c.getCommand() == Command.CommandValue.CANCEL && (c.getCommandInformation().equals(CANCELLATION_CALLER_CANCELLED) || c.getCommandInformation().equals(CANCELLATION_DUPLICATE) || c.getCommandInformation().equals(CANCELLATION_NOT_AN_INCIDENT) || c.getCommandInformation().equals(HOLD_AWAITING_VENDOR))) {
 				addMessageToIncidentLog(c.getCommandInformation());
 				state = canceled;
+			}
+			else {
+				throw new UnsupportedOperationException();
 			}
 			
 		}
@@ -369,11 +373,12 @@ public class Incident {
 			
 		}
 		/**
-		 * updates state 
+		 * updates state always throws if called
 		 * @param c command
+		 * @throws UnsupportedOperationException if called
 		 */
 		public void updateState(Command c) {
-			state = canceled;
+			throw new UnsupportedOperationException();
 		}
 		/**
 		 * returns state name
@@ -404,6 +409,9 @@ public class Incident {
 			if (c.getCommand() == Command.CommandValue.INVESTIGATE) {
 				setStatusDetails(Incident.NO_STATUS);
 				state = inProgress;
+			}
+			else {
+				throw new UnsupportedOperationException();
 			}
 		}
 		/**
@@ -437,11 +445,15 @@ public class Incident {
 				state = inProgress;
 				setStatusDetails(Incident.NO_STATUS);
 			}
-			if (c.getCommand() == Command.CommandValue.CANCEL) {
+			else if (c.getCommand() == Command.CommandValue.CANCEL && (c.getCommandInformation().equals(CANCELLATION_CALLER_CANCELLED) || c.getCommandInformation().equals(CANCELLATION_DUPLICATE) || c.getCommandInformation().equals(CANCELLATION_NOT_AN_INCIDENT) || c.getCommandInformation().equals(HOLD_AWAITING_VENDOR))) {
 				state = canceled;
 				incidentLog.remove(incidentLog.size());
 				setOwner(UNOWNED);
 			}
+			else {
+				throw new UnsupportedOperationException();
+			}
+			
 		}
 		/**
 		 * returns state name
@@ -469,15 +481,18 @@ public class Incident {
 		 * @param c command
 		 */
 		public void updateState(Command c) {
-			if (c.getCommand() == Command.CommandValue.CANCEL) {
+			if (c.getCommand() == Command.CommandValue.CANCEL && (c.getCommandInformation().equals(CANCELLATION_CALLER_CANCELLED) || c.getCommandInformation().equals(CANCELLATION_DUPLICATE) || c.getCommandInformation().equals(CANCELLATION_NOT_AN_INCIDENT) || c.getCommandInformation().equals(HOLD_AWAITING_VENDOR))) {
 				state = canceled;
 			}
-			if (c.getCommand() == Command.CommandValue.ASSIGN) {
+			else if (c.getCommand() == Command.CommandValue.ASSIGN) {
 				setOwner(c.getCommandInformation());
 				state = inProgress;
 			}
-			if (c.getCommand() == Command.CommandValue.INVESTIGATE) {
+			else if (c.getCommand() == Command.CommandValue.INVESTIGATE) {
 				state = inProgress;
+			}
+			else {
+				throw new UnsupportedOperationException();
 			}
 		}
 		/**

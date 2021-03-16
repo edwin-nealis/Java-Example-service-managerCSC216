@@ -134,7 +134,7 @@ public class ServiceWolfManager {
 	 * @param name name
 	 */
 	public void loadServiceGroup(String name) {
-		if (serviceGroups.size() != 0) {
+		if (!serviceGroups.isEmpty()) {
 		for (int i = 0; i < serviceGroups.size(); i++) {
 			if (serviceGroups.get(i).getServiceGroupName().equals(name)) {
 				currentServiceGroup = serviceGroups.get(i);
