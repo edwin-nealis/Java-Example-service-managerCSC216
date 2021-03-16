@@ -134,10 +134,12 @@ public class ServiceWolfManager {
 	 * @param name name
 	 */
 	public void loadServiceGroup(String name) {
+		if (serviceGroups.size() != 0) {
 		for (int i = 0; i < serviceGroups.size(); i++) {
 			if (serviceGroups.get(i).getServiceGroupName().equals(name)) {
 				currentServiceGroup = serviceGroups.get(i);
 			}
+		}
 		}
 	}
 	/**
@@ -174,11 +176,13 @@ public class ServiceWolfManager {
 	 * @param temp temp
 	 */
 	public void editServiceGroup(String temp) {
+		if ( currentServiceGroup != null) {
 		checkDuplicateServiceName(temp);
 		currentServiceGroup.setServiceGroupName(temp);
 		ServiceGroup temp2 = serviceGroups.remove(serviceGroups.indexOf(currentServiceGroup));
 		addServiceGroupToListByName(temp2);
 		loadServiceGroup(temp);
+		}
 	}
 	/**
 	 * adds service group to the list by its specified name
@@ -219,7 +223,7 @@ public class ServiceWolfManager {
 		}
 		for (int i = 0; i < serviceGroups.size(); i++) {
 			if (serviceGroups.get(i).getServiceGroupName().compareToIgnoreCase(name) == 0) {
-				throw new IllegalArgumentException("Invalid servcie group name.");
+				throw new IllegalArgumentException("Invalid service group name.");
 			}
 		}
 	}

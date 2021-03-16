@@ -62,5 +62,26 @@ public class ServiceGroupTest {
 		
 		
 	}
+	@Test
+	public void testAddIncident() {
+		ArrayList<String> list = new ArrayList<String>();
+		ServiceGroup sg = new ServiceGroup("sg");
+		list.add("abc");
+		Incident i1 = new Incident(3, "New", "title", "caller", 0, "Unowned", Incident.NO_STATUS, list);
+		sg.addIncident(i1);
+		assertEquals(i1.getId(), 3);
+		Incident i2 = new Incident(7, "New", "title", "caller", 0, "Unowned", Incident.NO_STATUS, list);
+		sg.addIncident(i2);
+		assertEquals(i2.getId(), 7);
+		Incident i3 = new Incident(5, "New", "title", "caller", 0, "Unowned", Incident.NO_STATUS, list);
+		sg.addIncident(i3);
+		assertEquals(i3.getId(), 5);
+		Incident i4 = new Incident(2, "New", "title", "caller", 0, "Unowned", Incident.NO_STATUS, list);
+		sg.addIncident(i4);
+		assertEquals(i4.getId(), 2);
+		Incident i5 = new Incident(4, "New", "title", "caller", 0, "Unowned", Incident.NO_STATUS, list);
+		sg.addIncident(i5);
+		assertEquals(i5.getId(), 4);
+	}
 
 }
