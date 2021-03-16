@@ -41,13 +41,8 @@ public class ServiceGroupsReader {
 			serviceGroup.useDelimiter("\\r?\\n?[#]");
 			while (serviceGroup.hasNext()) {
 				serviceGroupToken = serviceGroup.next();
-				try {
 					ServiceGroup serviceGroupObj = processServiceGroup(serviceGroupToken);
 				serviceGroups.add(serviceGroupObj);
-				}
-				catch (IllegalArgumentException e) {
-					//Intentionally empty
-				}
 			}
 			serviceGroup.close();
 			}
@@ -75,24 +70,27 @@ public class ServiceGroupsReader {
 			input.close();
 			throw new IllegalArgumentException();
 		}
+		if (serviceGroupName.contains("*")) {
+			input.close();
+			throw new IllegalArgumentException();
+		}
 		serviceGroupName = serviceGroupName.substring(1);
 		serviceGroupName = serviceGroupName.trim();
-		ServiceGroup serviceGroup = new ServiceGroup(serviceGroupName);
-		while(input.hasNext()) {
+			ServiceGroup serviceGroup = new ServiceGroup(serviceGroupName);
+		try {
+			while(input.hasNext()) {
 			incident = input.next();
 			incident = incident.trim();
-			try {
 				Incident i = processIncident(incident);
 				serviceGroup.addIncident(i);
-			}
-			catch (IllegalArgumentException e) {
-				input.close();
-				throw new IllegalArgumentException();
-			}
-			
 		}
 		input.close();
 		return serviceGroup;
+		}
+		catch (IllegalArgumentException e) {
+				input.close();
+				throw new IllegalArgumentException();
+		}
 	}
 	/**
 	 * helper method that take a string and creates an incident

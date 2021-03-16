@@ -56,7 +56,7 @@ public class Incident {
 	/** unnecessary message */
 	public static final String CANCELLATION_UNNECESSARY = "Unnecessry";
 	/** not a incident message */
-	public static final String CANCELLATION_NOT_AN_INCIDENT = "Not a Incident";
+	public static final String CANCELLATION_NOT_AN_INCIDENT = "Not an Incident";
 	/** Caller canceled message */
 	public static final String CANCELLATION_CALLER_CANCELLED = "Caller Canceled";
 	/** unowned message */
@@ -118,7 +118,12 @@ public class Incident {
 			setCounter(id);
 		}
 		setState(state);
-		this.incidentLog = incidentLog;
+		if (incidentLog.isEmpty()) {
+			throw new IllegalArgumentException("Incident cannot be created");
+		}
+		else {
+			this.incidentLog = incidentLog;
+		}
 	}
 	/** 
 	 * sets Id value 
@@ -145,16 +150,16 @@ public class Incident {
 		if (state.equals(NEW_NAME) && owner.equals(UNOWNED) && statusDetails.equals(NO_STATUS)) {
 			this.state = newState;
 		}
-		else if (state.equals(CANCELED_NAME) && owner.equals(UNOWNED)) {
+		else if (state.equals(CANCELED_NAME) && owner.equals(UNOWNED) && (statusDetails.equals(CANCELLATION_CALLER_CANCELLED) || statusDetails.equals(CANCELLATION_DUPLICATE) || statusDetails.equals(CANCELLATION_NOT_AN_INCIDENT) || statusDetails.equals(CANCELLATION_UNNECESSARY))) {
 			this.state = canceled;
 		}
-		else if (state.equals(IN_PROGRESS_NAME) && statusDetails.equals(NO_STATUS)) {
+		else if (state.equals(IN_PROGRESS_NAME) && statusDetails.equals(NO_STATUS) && !owner.equals(UNOWNED)) {
 			this.state = inProgress;
 		}
-		else if (state.equals(ON_HOLD_NAME)) {
+		else if (state.equals(ON_HOLD_NAME) && !owner.equals(UNOWNED) && (statusDetails.equals(HOLD_AWAITING_CALLER) || statusDetails.equals(HOLD_AWAITING_CHANGE) || statusDetails.equals(HOLD_AWAITING_VENDOR))) {
 			this.state = onHold;
 		}
-		else if (state.equals(RESOLVED_NAME)) {
+		else if (state.equals(RESOLVED_NAME) && !owner.equals(UNOWNED) && (statusDetails.equals(RESOLUTION_PERMANENTLY_SOLVED) || statusDetails.equals(RESOLUTION_WORKAROUND) || statusDetails.equals(RESOLUTION_CALLER_CLOSED))) {
 			this.state = resolved;
 		}
 		else {

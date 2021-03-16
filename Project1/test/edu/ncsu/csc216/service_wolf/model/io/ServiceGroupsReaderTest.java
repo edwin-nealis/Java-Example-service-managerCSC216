@@ -63,13 +63,14 @@ public class ServiceGroupsReaderTest {
 	}
 	@Test
 	public void testServiceGroupReaderInValid() {
-		ArrayList<ServiceGroup> sg;
+		ArrayList<ServiceGroup> sg = null;
 		for (int i = 6; i < 28; i++) {
 			try {
 				sg = ServiceGroupsReader.readServiceGroupsFile("test-files/incidents" + i + ".txt");
+				fail("incidents " + i + " failed");
 			}
 			catch (IllegalArgumentException e) {
-				assertEquals(e.getMessage(), "Incident cannot be created");
+				assertNull(sg);
 			}
 		}
 	}
