@@ -18,6 +18,8 @@ import edu.ncsu.csc216.service_wolf.model.service_group.ServiceGroup;
  *
  */
 public class ServiceGroupsReaderTest {
+	/** export file path */
+	private final String export = "test-files/export.txt";
 	/** valid file path */
 	private final String validFile = "test-files/incidents1.txt";
 	/** expected for valid incident CSC IT 2*/
@@ -48,7 +50,7 @@ public class ServiceGroupsReaderTest {
 	 * test service group reader method
 	 */
 	@Test
-	public void testServiceGroupReader() {
+	public void testServiceGroupReaderValid() {
 			ArrayList<ServiceGroup> sg = ServiceGroupsReader.readServiceGroupsFile(validFile);
 			assertEquals(3, sg.size());
 			assertEquals(sg.get(0).getIncidents().get(0).toString(), cscIt2);
@@ -59,6 +61,17 @@ public class ServiceGroupsReaderTest {
 			assertEquals(sg.get(1).getIncidents().get(0).toString(), itecs);
 
 	}
-
-
+	@Test
+	public void testServiceGroupReaderInValid() {
+		ArrayList<ServiceGroup> sg;
+		for (int i = 6; i < 28; i++) {
+			try {
+				sg = ServiceGroupsReader.readServiceGroupsFile("test-files/incidents" + i + ".txt");
+			}
+			catch (IllegalArgumentException e) {
+				assertEquals(e.getMessage(), "Incident cannot be created");
+			}
+		}
+	}
+		
 }

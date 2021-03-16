@@ -45,21 +45,6 @@ public class ServiceWolfManagerTest {
 	}
 
 	/**
-	 * tests get incidents as array mehtod 
-	 */
-	@Test
-	public void testGetIncidentsAsArray() {
-		fail("Not yet implemented");
-	}
-	
-	/**
-	 * tests execute command method 
-	 */
-	@Test
-	public void testExecuteCommand() {
-		fail("Not yet implemented");
-	}
-	/**
 	 * tests delete incident by id
 	 */
 	@Test

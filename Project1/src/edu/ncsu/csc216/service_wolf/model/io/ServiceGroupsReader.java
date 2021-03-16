@@ -3,6 +3,8 @@ package edu.ncsu.csc216.service_wolf.model.io;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.InputMismatchException;
+import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 import edu.ncsu.csc216.service_wolf.model.incident.Incident;
@@ -31,6 +33,7 @@ public class ServiceGroupsReader {
 			String serviceGroupToken;
 			try {
 			Scanner input = new Scanner(new FileInputStream(fileName));
+			
 			while(input.hasNext()) {
 				file += input.nextLine() + "\n";
 			}
@@ -38,8 +41,13 @@ public class ServiceGroupsReader {
 			serviceGroup.useDelimiter("\\r?\\n?[#]");
 			while (serviceGroup.hasNext()) {
 				serviceGroupToken = serviceGroup.next();
-				ServiceGroup serviceGroupObj = processServiceGroup(serviceGroupToken);
+				try {
+					ServiceGroup serviceGroupObj = processServiceGroup(serviceGroupToken);
 				serviceGroups.add(serviceGroupObj);
+				}
+				catch (IllegalArgumentException e) {
+					//Intentionally empty
+				}
 			}
 			serviceGroup.close();
 			}
@@ -58,15 +66,30 @@ public class ServiceGroupsReader {
 		String serviceGroupName;
 		Scanner input = new Scanner(string);
 		input.useDelimiter("\\r?\\n?[*]");
-		serviceGroupName = input.next();
+		try {
+			serviceGroupName = input.next();
+		} catch (InputMismatchException e) {
+			input.close();
+			throw new IllegalArgumentException();
+		} catch (NoSuchElementException e) {
+			input.close();
+			throw new IllegalArgumentException();
+		}
 		serviceGroupName = serviceGroupName.substring(1);
 		serviceGroupName = serviceGroupName.trim();
 		ServiceGroup serviceGroup = new ServiceGroup(serviceGroupName);
 		while(input.hasNext()) {
 			incident = input.next();
 			incident = incident.trim();
-			Incident i = processIncident(incident);
-			serviceGroup.addIncident(i);
+			try {
+				Incident i = processIncident(incident);
+				serviceGroup.addIncident(i);
+			}
+			catch (IllegalArgumentException e) {
+				input.close();
+				throw new IllegalArgumentException();
+			}
+			
 		}
 		input.close();
 		return serviceGroup;
@@ -87,7 +110,8 @@ public class ServiceGroupsReader {
 		ArrayList<String> incidentLog = new ArrayList<String>();
 		Scanner in = new Scanner(string);
 		in.useDelimiter(",");
-		id = in.nextInt();
+		try {
+			id = in.nextInt();
 		state = in.next();
 		title = in.next();
 		caller = in.next();
@@ -102,6 +126,14 @@ public class ServiceGroupsReader {
 			logMessage = logMessage.trim();
 			incidentLog.add(logMessage);
 		}
+		}
+		catch (InputMismatchException e) {
+		in.close();
+		throw new IllegalArgumentException();
+	} catch (NoSuchElementException e) {
+		in.close();
+		throw new IllegalArgumentException();
+	}
 		Incident incident = new Incident(id, state, title, caller, reopenCount, owner, statusDetails, incidentLog);
 		in.close();
 		return incident;
