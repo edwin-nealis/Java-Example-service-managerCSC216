@@ -63,7 +63,21 @@ public class ServiceWolfManager {
 	 * @param fileName file name
 	 */
 	public void loadFromFile(String fileName) {
-		serviceGroups = ServiceGroupsReader.readServiceGroupsFile(fileName);
+		ArrayList<ServiceGroup> sg = ServiceGroupsReader.readServiceGroupsFile(fileName);
+		for (int j = 0; j < sg.size(); j++) {
+				for (int i = 0; i < serviceGroups.size(); i++) {
+					if (serviceGroups.get(i).getServiceGroupName().compareToIgnoreCase(sg.get(j).getServiceGroupName()) > 0) {
+						serviceGroups.add(i, sg.get(j));
+						break;
+					}
+				}
+				if (serviceGroups.isEmpty()) {
+					serviceGroups.add(0, sg.get(j));
+				}
+				else {
+					serviceGroups.add(serviceGroups.size(), sg.get(j));
+				}
+		}
 		currentServiceGroup = serviceGroups.get(0);
 	}
 
@@ -224,10 +238,10 @@ public class ServiceWolfManager {
 				break;
 			}
 		}
-		if (!serviceGroups.contains(sg) && serviceGroups.size() == 0) {
+		if (serviceGroups.isEmpty()) {
 			serviceGroups.add(0, sg);
 		}
-		if (!serviceGroups.contains(sg) && serviceGroups.size() != 0) {
+		else {
 			serviceGroups.add(serviceGroups.size(), sg);
 		}
 	}
