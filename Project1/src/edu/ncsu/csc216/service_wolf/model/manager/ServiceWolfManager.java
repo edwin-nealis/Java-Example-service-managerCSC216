@@ -49,6 +49,7 @@ public class ServiceWolfManager {
 	 * saves to a file
 	 * 
 	 * @param fileName file name
+	 * @throws IllegalArgumetnException if currentServiceGroup is null or has no incidents
 	 */
 	public void saveToFile(String fileName) {
 		if (currentServiceGroup == null || currentServiceGroup.getIncidents().size() == 0) {
@@ -58,7 +59,7 @@ public class ServiceWolfManager {
 	}
 
 	/**
-	 * load from file name
+	 * load service groups from file name and sort by name
 	 * 
 	 * @param fileName file name
 	 */

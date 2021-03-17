@@ -147,6 +147,9 @@ public class Incident {
 	 * @param state state
 	 */
 	private void setState(String state) {
+		if (state == null || "".equals(state)) {
+			throw new IllegalArgumentException("Incident cannot be created");
+		}
 		if (state.equals(NEW_NAME) && owner.equals(UNOWNED) && statusDetails.equals(NO_STATUS)) {
 			this.state = newState;
 		}
