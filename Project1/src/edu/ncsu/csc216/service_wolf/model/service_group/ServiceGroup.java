@@ -62,6 +62,9 @@ public class ServiceGroup {
 	 */
 	public void addIncident(Incident i) {
 		for (int j = 0; j < incidents.size(); j++) {
+			if (i.getId() == incidents.get(j).getId()) {
+				throw new IllegalArgumentException("Incident cannot be created");
+			}
 			if (i.getId() < incidents.get(j).getId()) {
 				incidents.add(j, i);
 				break;

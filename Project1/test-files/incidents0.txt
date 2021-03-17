@@ -2,10 +2,10 @@
 * 1,New,title1,caller1,0,Unowned,No Status
 - message1
 # Service Group 2
-* 2,New,title2,caller2,0,Unowned,No Status
+* 1,New,title2,caller2,0,Unowned,No Status
 - message2
 # Service Group 3
-* 3,New,title3,caller3,0,Unowned,No Status
+* 1,New,title3,caller3,0,Unowned,No Status
 - message3
-* 4,New,title4,caller4,0,Unowned,No Status
+* 2,New,title4,caller4,0,Unowned,No Status
 - message4

@@ -269,6 +269,7 @@ public class ServiceWolfManager {
 		sg = new ServiceGroup(name);
 		addServiceGroupToListByName(sg);
 		loadServiceGroup(name);
+		Incident.setCounter(1);
 	}
 
 	/**
