@@ -2,6 +2,10 @@ package edu.ncsu.csc216.service_wolf.model.manager;
 
 import static org.junit.Assert.*;
 
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.util.Scanner;
+
 import org.junit.Before;
 import org.junit.Test;
 
@@ -30,7 +34,37 @@ public class ServiceWolfManagerTest {
 	 */
 	@Test
 	public void testSaveToFile() {
-		fail("Not yet implemented");
+		instance.addServiceGroup("Service Group 1");
+		instance.addIncidentToServiceGroup("title1", "caller1", "message1");
+		instance.addServiceGroup("Service Group 2");
+		instance.addIncidentToServiceGroup("title2", "caller2", "message2");
+		instance.addServiceGroup("Service Group 3");
+		instance.addIncidentToServiceGroup("title3", "caller3", "message3");
+		instance.addIncidentToServiceGroup("title4", "caller4", "message4");
+		instance.saveToFile("test-files/export.txt");
+		checkFiles("test-files/incidents0.txt", "test-files/export.txt");
+		instance.resetManager();
+		
+	}
+	/**
+	 * Helper method to compare two files for the same contents
+	 * 
+	 * @param expFile expected output
+	 * @param actFile actual output
+	 */
+	private void checkFiles(String expFile, String actFile) {
+		try (Scanner expScanner = new Scanner(new FileInputStream(expFile));
+				Scanner actScanner = new Scanner(new FileInputStream(actFile));) {
+
+			while (expScanner.hasNextLine()) {
+				assertEquals(expScanner.nextLine(), actScanner.nextLine());
+			}
+
+			expScanner.close();
+			actScanner.close();
+		} catch (IOException e) {
+			fail("Error reading files.");
+		}
 	}
 	/**
 	 * tests load from file method
@@ -112,6 +146,9 @@ public class ServiceWolfManagerTest {
 		assertNull(instance.getServiceGroupName());
 		instance.resetManager();
 	}
+	/**
+	 * tests add incident to service group method
+	 */
 	@Test
 	public void testAddIncidentToServiceGroup() {
 		instance.addServiceGroup("sg");
