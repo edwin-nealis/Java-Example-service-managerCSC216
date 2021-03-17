@@ -6,7 +6,6 @@ import org.junit.Before;
 import org.junit.Test;
 
 import edu.ncsu.csc216.service_wolf.model.incident.Incident;
-import edu.ncsu.csc216.service_wolf.model.service_group.ServiceGroup;
 /**
  * test service wolf manager class
  * @author edwin
