@@ -346,6 +346,7 @@ public class Incident {
 				addMessageToIncidentLog(c.getCommandInformation());
 				state = canceled;
 				setOwner(UNOWNED);
+				setStatusDetails(c.getCommandInformation());
 			}
 			else {
 				throw new UnsupportedOperationException();
