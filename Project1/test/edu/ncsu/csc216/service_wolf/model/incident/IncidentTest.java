@@ -32,6 +32,7 @@ public class IncidentTest {
 		Incident i2;
 		Incident i3;
 		Incident i4;
+		Incident i6 = null;
 		i2 = null;
 		try {
 			i2 = new Incident(null, "caller", "message");
@@ -64,6 +65,8 @@ public class IncidentTest {
 		assertEquals(i1.getId(), 1);
 		ArrayList<String> list = new ArrayList<String>();
 		list.add("abc");
+		ArrayList<String> list2 = new ArrayList<String>();
+		list2.add(null);
 		Incident i5 = new Incident(1, "New", "title", "caller", 0, "Unowned", Incident.NO_STATUS, list);
 		assertEquals(i5.getId(), 1);
 		assertEquals(i5.getState(), "New");
@@ -73,6 +76,13 @@ public class IncidentTest {
 		assertEquals(i5.getOwner(), "Unowned");
 		assertEquals(i5.getStatusDetails(), Incident.NO_STATUS);
 		assertEquals(i5.getIncidentLogMessages(), "- abc\n");
+		try {
+			i6 = new Incident(1, "New", "title", "caller", 0, "Unowned", Incident.NO_STATUS, list2);
+			fail();
+		}
+		catch (IllegalArgumentException e) {
+			assertNull(i6);
+		}
 		
 	}
 	/**
