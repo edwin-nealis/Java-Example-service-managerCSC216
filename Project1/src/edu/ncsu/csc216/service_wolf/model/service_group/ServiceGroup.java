@@ -70,7 +70,7 @@ public class ServiceGroup {
 			}
 		}
 		if (!incidents.contains(i) && !incidents.isEmpty()) {
-			incidents.add(incidents.size() , i);
+			incidents.add(incidents.size() - 1, i);
 		}
 		if (incidents.isEmpty()) {
 			incidents.add(0, i);
