@@ -118,7 +118,7 @@ public class Incident {
 			setCounter(id);
 		}
 		setState(state);
-		if (incidentLog.isEmpty()) {
+		if (incidentLog.isEmpty() || incidentLog == null) {
 			throw new IllegalArgumentException("Incident cannot be created");
 		}
 		else {
