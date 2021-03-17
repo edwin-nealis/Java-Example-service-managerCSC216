@@ -75,7 +75,9 @@ public class IncidentTest {
 		assertEquals(i5.getIncidentLogMessages(), "- abc\n");
 		
 	}
-	
+	/**
+	 * tests going trough the fsm with all valid commands goes through all states
+	 */
 	@Test
 	public void testIncidentState() {
 		Incident i1 = new Incident("title", "caller", "message");
@@ -103,8 +105,11 @@ public class IncidentTest {
 		
 		
 	}
+	/**
+	 * tests the resolved state with transition in and out
+	 */
 	@Test
-	public void testInvalidStateTransitionResolved() {
+	public void testStateTransitionResolved() {
 		Incident i1 = new Incident("title", "caller", "message");
 		assertEquals(i1.getState(), "New");
 		Command c = new Command(Command.CommandValue.ASSIGN, "info", "message");
@@ -119,6 +124,20 @@ public class IncidentTest {
 		i1.update(c3);
 		assertEquals(i1.getState(), Incident.CANCELED_NAME);
 		assertEquals(i1.getStatusDetails(), Incident.CANCELLATION_DUPLICATE);
+		
+	}
+	@Test 
+	public void testStateTransitionInProgress() {
+		Incident i1 = new Incident("title", "caller", "message");
+		assertEquals(i1.getState(), "New");
+		Command c = new Command(Command.CommandValue.ASSIGN, "info", "message");
+		i1.update(c);
+		assertEquals(i1.getState(), Incident.IN_PROGRESS_NAME);
+		assertEquals(i1.getOwner(), "info");
+		Command c2 = new Command(Command.CommandValue.CANCEL, Incident.CANCELLATION_CALLER_CANCELLED, "message");
+		i1.update(c2);
+		assertEquals(i1.getState(), Incident.CANCELED_NAME);
+		assertEquals(i1.getStatusDetails(), Incident.CANCELLATION_CALLER_CANCELLED);
 		
 	}
 
