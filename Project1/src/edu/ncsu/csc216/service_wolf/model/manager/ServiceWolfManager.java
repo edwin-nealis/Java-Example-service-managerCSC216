@@ -192,6 +192,7 @@ public class ServiceWolfManager {
 		for (int i = 0; i < serviceGroups.size(); i++) {
 			if (serviceGroups.get(i).getServiceGroupName().compareToIgnoreCase(sg.getServiceGroupName()) > 0) {
 				serviceGroups.add(i, sg);
+				break;
 			}
 		}
 		if (!serviceGroups.contains(sg) && serviceGroups.size() == 0) {
