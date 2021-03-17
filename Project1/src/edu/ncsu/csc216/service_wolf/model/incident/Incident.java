@@ -345,6 +345,7 @@ public class Incident {
 			else if (c.getCommand() == Command.CommandValue.CANCEL && (c.getCommandInformation().equals(CANCELLATION_CALLER_CANCELLED) || c.getCommandInformation().equals(CANCELLATION_DUPLICATE) || c.getCommandInformation().equals(CANCELLATION_NOT_AN_INCIDENT) || c.getCommandInformation().equals(HOLD_AWAITING_VENDOR))) {
 				addMessageToIncidentLog(c.getCommandInformation());
 				state = canceled;
+				setOwner(UNOWNED);
 			}
 			else {
 				throw new UnsupportedOperationException();
