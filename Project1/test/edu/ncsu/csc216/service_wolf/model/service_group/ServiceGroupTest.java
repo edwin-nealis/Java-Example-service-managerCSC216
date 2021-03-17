@@ -42,6 +42,9 @@ public class ServiceGroupTest {
 		assertEquals(sg.getIncidentById(3).getTitle(), "title3");
 		
 	}
+	/**
+	 * tests set incident counter
+	 */
 	@Test
 	public void testSetIncidentCounter() {
 		ServiceGroup sg = new ServiceGroup("sg");
@@ -62,6 +65,9 @@ public class ServiceGroupTest {
 		
 		
 	}
+	/**
+	 * tests add incident
+	 */
 	@Test
 	public void testAddIncident() {
 		ArrayList<String> list = new ArrayList<String>();

@@ -16,7 +16,9 @@ public class ServiceWolfManagerTest {
 	ServiceWolfManager instance;
 	/** valid test file */
 	private final String validFile = "test-files/incidents1.txt";
-	
+	/**
+	 * gets an instance and sets counter for each test
+	 */
 	@Before
 	public void setUp() {
 		instance = ServiceWolfManager.getInstance();

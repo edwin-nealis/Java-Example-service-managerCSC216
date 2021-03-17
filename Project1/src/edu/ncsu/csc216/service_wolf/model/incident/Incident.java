@@ -54,7 +54,7 @@ public class Incident {
 	/** duplicate message */
 	public static final String CANCELLATION_DUPLICATE = "Duplicate";
 	/** unnecessary message */
-	public static final String CANCELLATION_UNNECESSARY = "Unnecessry";
+	public static final String CANCELLATION_UNNECESSARY = "Unnecessary";
 	/** not a incident message */
 	public static final String CANCELLATION_NOT_AN_INCIDENT = "Not an Incident";
 	/** Caller canceled message */
