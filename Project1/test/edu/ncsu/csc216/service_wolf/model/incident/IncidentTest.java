@@ -103,6 +103,24 @@ public class IncidentTest {
 		
 		
 	}
+	@Test
+	public void testInvalidStateTransitionResolved() {
+		Incident i1 = new Incident("title", "caller", "message");
+		assertEquals(i1.getState(), "New");
+		Command c = new Command(Command.CommandValue.ASSIGN, "info", "message");
+		i1.update(c);
+		assertEquals(i1.getState(), Incident.IN_PROGRESS_NAME);
+		assertEquals(i1.getOwner(), "info");
+		Command c2 = new Command(Command.CommandValue.RESOLVE, "Permanently Solved", "message");
+		i1.update(c2);
+		assertEquals(i1.getState(), Incident.RESOLVED_NAME);
+		assertEquals(i1.getStatusDetails(), "Permanently Solved");
+		Command c3 = new Command(Command.CommandValue.CANCEL, Incident.CANCELLATION_DUPLICATE, "message");
+		i1.update(c3);
+		assertEquals(i1.getState(), Incident.CANCELED_NAME);
+		assertEquals(i1.getStatusDetails(), Incident.CANCELLATION_DUPLICATE);
+		
+	}
 
 	
 

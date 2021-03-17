@@ -16,7 +16,7 @@ public class ServiceGroupWriter {
 	 * Constructor for service groupwriter
 	 */
 	public ServiceGroupWriter() {
-		
+		//empty by choice
 	}
 	/**
 	 * put service groups to a file with name fileName

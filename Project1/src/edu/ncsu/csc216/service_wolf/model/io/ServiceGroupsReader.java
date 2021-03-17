@@ -19,7 +19,7 @@ public class ServiceGroupsReader {
 	 * constructor for service group reader
 	 */
 	public ServiceGroupsReader() {
-		
+		//empty by choice
 	}
 	/**
 	 * reads service groups from file and returns them as an array list

@@ -2,14 +2,10 @@ package edu.ncsu.csc216.service_wolf.model.io;
 
 import static org.junit.Assert.*;
 
-import java.io.FileInputStream;
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Scanner;
 
 import org.junit.Test;
 
-import edu.ncsu.csc216.service_wolf.model.incident.Incident;
 import edu.ncsu.csc216.service_wolf.model.service_group.ServiceGroup;
 
 /**
@@ -18,8 +14,6 @@ import edu.ncsu.csc216.service_wolf.model.service_group.ServiceGroup;
  *
  */
 public class ServiceGroupsReaderTest {
-	/** export file path */
-	private final String export = "test-files/export.txt";
 	/** valid file path */
 	private final String validFile = "test-files/incidents1.txt";
 	/** expected for valid incident CSC IT 2*/

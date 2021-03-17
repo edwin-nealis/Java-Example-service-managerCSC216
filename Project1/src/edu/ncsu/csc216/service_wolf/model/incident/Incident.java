@@ -448,8 +448,9 @@ public class Incident {
 			}
 			else if (c.getCommand() == Command.CommandValue.CANCEL && (c.getCommandInformation().equals(CANCELLATION_CALLER_CANCELLED) || c.getCommandInformation().equals(CANCELLATION_DUPLICATE) || c.getCommandInformation().equals(CANCELLATION_NOT_AN_INCIDENT) || c.getCommandInformation().equals(HOLD_AWAITING_VENDOR))) {
 				state = canceled;
-				incidentLog.remove(incidentLog.size());
+				incidentLog.remove(incidentLog.size() - 1);
 				setOwner(UNOWNED);
+				setStatusDetails(c.getCommandInformation());
 			}
 			else {
 				throw new UnsupportedOperationException();
