@@ -112,6 +112,14 @@ public class ServiceWolfManagerTest {
 		assertNull(instance.getServiceGroupName());
 		instance.resetManager();
 	}
-
+	@Test
+	public void testAddIncidentToServiceGroup() {
+		instance.addServiceGroup("sg");
+		instance.addIncidentToServiceGroup("title1", "caller1", "message1");
+		String[][] s = instance.getIncidentsAsArray();
+		assertEquals(s.length, 1);
+		assertEquals(s[0][0], "1");
+		instance.resetManager();
+	}
 
 }

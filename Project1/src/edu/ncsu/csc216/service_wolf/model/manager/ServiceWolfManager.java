@@ -31,6 +31,7 @@ public class ServiceWolfManager {
 	private ServiceWolfManager() {
 		serviceGroups = new ArrayList<ServiceGroup>();
 		currentServiceGroup = null;
+		Incident.setCounter(1);
 	}
 
 	/**
@@ -92,7 +93,7 @@ public class ServiceWolfManager {
 			int a = currentServiceGroup.getIncidents().size();
 			String[][] array = new String[a][4];
 			for (int i = 0; i < a; i++) {
-				for (int j = 0; j < array[i].length; j++) {
+				for (int j = 0; j < 4; j++) {
 					if (j == 0) {
 						array[i][0] = String.valueOf(currentServiceGroup.getIncidents().get(i).getId());
 					}
