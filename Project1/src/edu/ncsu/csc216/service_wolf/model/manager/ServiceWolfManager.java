@@ -225,12 +225,15 @@ public class ServiceWolfManager {
 	 * @param temp temp
 	 */
 	public void editServiceGroup(String temp) {
-		if (currentServiceGroup != null) {
+		if (currentServiceGroup != null && !serviceGroups.isEmpty()) {
 			checkDuplicateServiceName(temp);
 			currentServiceGroup.setServiceGroupName(temp);
 			ServiceGroup temp2 = serviceGroups.remove(serviceGroups.indexOf(currentServiceGroup));
 			addServiceGroupToListByName(temp2);
 			loadServiceGroup(temp);
+		}
+		else {
+			throw new IllegalArgumentException("No service group selected.");
 		}
 	}
 
