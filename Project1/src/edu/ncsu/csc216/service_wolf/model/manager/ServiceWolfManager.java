@@ -313,5 +313,6 @@ public class ServiceWolfManager {
 	 */
 	protected void resetManager() {
 		instance = null;
+		Incident.setCounter(1);
 	}
 }

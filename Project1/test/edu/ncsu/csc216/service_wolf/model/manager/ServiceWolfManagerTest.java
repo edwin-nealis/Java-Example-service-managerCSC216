@@ -160,6 +160,9 @@ public class ServiceWolfManagerTest {
 		String[][] s = instance.getIncidentsAsArray();
 		assertEquals(s.length, 1);
 		assertEquals(s[0][0], "1");
+		assertEquals(s[0][1], "New");
+		assertEquals(s[0][2], "title1");
+		assertEquals(s[0][3], "No Status");
 		instance.resetManager();
 	}
 
