@@ -36,11 +36,15 @@ public class ServiceWolfManagerTest {
 	public void testSaveToFile() {
 		instance.addServiceGroup("Service Group 1");
 		instance.addIncidentToServiceGroup("title1", "caller1", "message1");
+		assertEquals(instance.getIncidentById(1).getCaller(), "caller1");
 		instance.addServiceGroup("Service Group 2");
 		instance.addIncidentToServiceGroup("title2", "caller2", "message2");
+		assertEquals(instance.getIncidentById(2).getCaller(), "caller2");
 		instance.addServiceGroup("Service Group 3");
 		instance.addIncidentToServiceGroup("title3", "caller3", "message3");
+		assertEquals(instance.getIncidentById(3).getCaller(), "caller3");
 		instance.addIncidentToServiceGroup("title4", "caller4", "message4");
+		assertEquals(instance.getIncidentById(4).getCaller(), "caller4");
 		instance.saveToFile("test-files/export.txt");
 		checkFiles("test-files/incidents0.txt", "test-files/export.txt");
 		instance.resetManager();
