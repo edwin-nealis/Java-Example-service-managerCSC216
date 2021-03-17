@@ -167,6 +167,7 @@ public class ServiceWolfManager {
 	 * loads a service group
 	 * 
 	 * @param name name
+	 * @throws IllegalArgumetnException if service group does not exist
 	 */
 	public void loadServiceGroup(String name) {
 		if (!serviceGroups.isEmpty()) {
@@ -175,6 +176,12 @@ public class ServiceWolfManager {
 					currentServiceGroup = serviceGroups.get(i);
 				}
 			}
+			if (!currentServiceGroup.getServiceGroupName().equals(name)) {
+				throw new IllegalArgumentException();
+			}
+		}
+		else {
+			throw new IllegalArgumentException();
 		}
 	}
 
@@ -287,7 +294,7 @@ public class ServiceWolfManager {
 	 * @throws IllegalArgumentException if no service group is selected
 	 */
 	public void deleteServiceGroup() {
-		if (currentServiceGroup == null || serviceGroups.size() == 0) {
+		if (currentServiceGroup == null || serviceGroups.isEmpty()) {
 			throw new IllegalArgumentException("No service group selected.");
 		}
 		serviceGroups.remove(currentServiceGroup);
