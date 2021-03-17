@@ -343,7 +343,6 @@ public class Incident {
 				setOwner(c.getCommandInformation());
 			}
 			else if (c.getCommand() == Command.CommandValue.CANCEL && (c.getCommandInformation().equals(CANCELLATION_CALLER_CANCELLED) || c.getCommandInformation().equals(CANCELLATION_DUPLICATE) || c.getCommandInformation().equals(CANCELLATION_NOT_AN_INCIDENT) || c.getCommandInformation().equals(HOLD_AWAITING_VENDOR))) {
-				addMessageToIncidentLog(c.getCommandInformation());
 				state = canceled;
 				setOwner(UNOWNED);
 				setStatusDetails(c.getCommandInformation());
@@ -486,6 +485,8 @@ public class Incident {
 		public void updateState(Command c) {
 			if (c.getCommand() == Command.CommandValue.CANCEL && (c.getCommandInformation().equals(CANCELLATION_CALLER_CANCELLED) || c.getCommandInformation().equals(CANCELLATION_DUPLICATE) || c.getCommandInformation().equals(CANCELLATION_NOT_AN_INCIDENT) || c.getCommandInformation().equals(HOLD_AWAITING_VENDOR))) {
 				state = canceled;
+				setOwner(UNOWNED);
+				setStatusDetails(c.getCommandInformation());
 			}
 			else if (c.getCommand() == Command.CommandValue.ASSIGN) {
 				setOwner(c.getCommandInformation());

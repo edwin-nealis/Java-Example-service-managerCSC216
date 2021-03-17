@@ -112,6 +112,7 @@ public class IncidentTest {
 	public void testStateTransitionResolved() {
 		Incident i1 = new Incident("title", "caller", "message");
 		assertEquals(i1.getState(), "New");
+		assertEquals(i1.getOwner(), Incident.UNOWNED);
 		Command c = new Command(Command.CommandValue.ASSIGN, "info", "message");
 		i1.update(c);
 		assertEquals(i1.getState(), Incident.IN_PROGRESS_NAME);
@@ -124,8 +125,12 @@ public class IncidentTest {
 		i1.update(c3);
 		assertEquals(i1.getState(), Incident.CANCELED_NAME);
 		assertEquals(i1.getStatusDetails(), Incident.CANCELLATION_DUPLICATE);
+		assertEquals(i1.getOwner(), Incident.UNOWNED);
 		
 	}
+	/**
+	 * test transition in and out of inprogress state
+	 */
 	@Test 
 	public void testStateTransitionInProgress() {
 		Incident i1 = new Incident("title", "caller", "message");
@@ -138,7 +143,21 @@ public class IncidentTest {
 		i1.update(c2);
 		assertEquals(i1.getState(), Incident.CANCELED_NAME);
 		assertEquals(i1.getStatusDetails(), Incident.CANCELLATION_CALLER_CANCELLED);
+		assertEquals(i1.getOwner(), Incident.UNOWNED);
 		
+	}
+	/**
+	 * tests transition in and out of new state
+	 */
+	@Test
+	public void testStateTransitionNew() {
+		Incident i1 = new Incident("title", "caller", "message");
+		assertEquals(i1.getState(), "New");
+		Command c1 = new Command(Command.CommandValue.CANCEL, Incident.CANCELLATION_CALLER_CANCELLED, "message");
+		i1.update(c1);
+		assertEquals(i1.getState(), Incident.CANCELED_NAME);
+		assertEquals(i1.getStatusDetails(), Incident.CANCELLATION_CALLER_CANCELLED);
+		assertEquals(i1.getOwner(), Incident.UNOWNED);
 	}
 
 	

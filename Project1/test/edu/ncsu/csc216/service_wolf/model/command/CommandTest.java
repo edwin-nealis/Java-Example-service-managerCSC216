@@ -28,7 +28,7 @@ public class CommandTest {
 			assertNull(c1);
 		}
 		try {
-			c1 = new Command(Command.CommandValue.INVESTIGATE,"not null" , "message");
+			c1 = new Command(Command.CommandValue.INVESTIGATE, "not null", "message");
 			fail();
 		}
 		catch (IllegalArgumentException e) {
