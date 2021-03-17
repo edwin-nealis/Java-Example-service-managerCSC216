@@ -73,12 +73,12 @@ public class ServiceWolfManager {
 				}
 				if (serviceGroups.isEmpty()) {
 					serviceGroups.add(0, sg.get(j));
+					currentServiceGroup = serviceGroups.get(0);
 				}
 				else {
 					serviceGroups.add(serviceGroups.size(), sg.get(j));
 				}
 		}
-		currentServiceGroup = serviceGroups.get(0);
 	}
 
 	/**
