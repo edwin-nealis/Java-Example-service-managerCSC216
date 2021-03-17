@@ -73,7 +73,7 @@ public class ServiceGroup {
 		if (incidents.isEmpty()) {
 			incidents.add(0, i);
 		}
-		else {
+		else if (!incidents.contains(i)){
 			incidents.add(incidents.size(), i);
 		}
 	}

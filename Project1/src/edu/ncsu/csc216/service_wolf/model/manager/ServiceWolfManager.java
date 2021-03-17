@@ -76,7 +76,7 @@ public class ServiceWolfManager {
 				if (serviceGroups.isEmpty()) {
 					serviceGroups.add(0, sg.get(j));
 				}
-				else {
+				else if (!serviceGroups.contains(sg.get(j))){
 					serviceGroups.add(serviceGroups.size(), sg.get(j));
 				}
 		}
@@ -242,7 +242,7 @@ public class ServiceWolfManager {
 		if (serviceGroups.isEmpty()) {
 			serviceGroups.add(0, sg);
 		}
-		else {
+		else if (!serviceGroups.contains(sg)){
 			serviceGroups.add(serviceGroups.size(), sg);
 		}
 	}
