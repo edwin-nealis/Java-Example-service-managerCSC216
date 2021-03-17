@@ -60,6 +60,7 @@ public class ServiceWolfManagerTest {
 		instance.deleteIncidentById(2);
 		assertEquals(instance.getIncidentById(1).getTitle(), "title");
 		assertNull(instance.getIncidentById(2));
+		instance.resetManager();
 		
 	}
 
@@ -96,6 +97,7 @@ public class ServiceWolfManagerTest {
 		assertEquals(instance.getServiceGroupList()[0], temp[0]);
 		assertEquals(instance.getServiceGroupList()[1], temp[1]);
 		assertEquals(instance.getServiceGroupList()[2], temp[2]);
+		instance.resetManager();
 	}
 
 	/**

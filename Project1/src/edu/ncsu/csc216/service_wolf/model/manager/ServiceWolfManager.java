@@ -64,6 +64,7 @@ public class ServiceWolfManager {
 	 */
 	public void loadFromFile(String fileName) {
 		ArrayList<ServiceGroup> sg = ServiceGroupsReader.readServiceGroupsFile(fileName);
+		currentServiceGroup = sg.get(0);
 		for (int j = 0; j < sg.size(); j++) {
 				for (int i = 0; i < serviceGroups.size(); i++) {
 					if (serviceGroups.get(i).getServiceGroupName().compareToIgnoreCase(sg.get(j).getServiceGroupName()) > 0) {
@@ -73,7 +74,6 @@ public class ServiceWolfManager {
 				}
 				if (serviceGroups.isEmpty()) {
 					serviceGroups.add(0, sg.get(j));
-					currentServiceGroup = serviceGroups.get(0);
 				}
 				else {
 					serviceGroups.add(serviceGroups.size(), sg.get(j));

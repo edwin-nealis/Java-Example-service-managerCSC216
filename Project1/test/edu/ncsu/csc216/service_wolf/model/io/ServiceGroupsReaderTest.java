@@ -56,6 +56,9 @@ public class ServiceGroupsReaderTest {
 			
 
 	}
+	/**
+	 * tests service group reader with invalid files.
+	 */
 	@Test
 	public void testServiceGroupReaderInValid() {
 		ArrayList<ServiceGroup> sg = null;
