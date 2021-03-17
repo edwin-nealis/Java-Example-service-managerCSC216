@@ -30,7 +30,7 @@ public class ServiceGroupWriter {
 			for (int i = 0; i < list.size(); i++) {
 				fileWriter.println("# " + list.get(i).getServiceGroupName());
 				for (int j = 0; j < list.get(i).getIncidents().size(); j++) {
-					fileWriter.println(list.get(i).getIncidents().get(j).toString().substring(0, list.get(i).getIncidents().get(j).toString().length() -1));
+					fileWriter.println(list.get(i).getIncidents().get(j).toString().substring(0, list.get(i).getIncidents().get(j).toString().length() - 1));
 				}
 			}
 			fileWriter.close();

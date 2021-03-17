@@ -36,7 +36,7 @@ public class ServiceGroup {
 				temp = incidents.get(i).getId();
 			}
 		}
-		Incident.setCounter(temp +1); 
+		Incident.setCounter(temp + 1); 
 	}
 	/**
 	 * set service group name 

@@ -306,7 +306,6 @@ public class Incident {
 	/**
 	 * updates command
 	 * @param c command
-	 * @throws UnsupportedOperationException
 	 */
 	public void update(Command c) {
 		state.updateState(c);
@@ -318,7 +317,7 @@ public class Incident {
 	 * @author Edwin Nealis
 	 *
 	 */
-	public class InProgressState implements IncidentState{
+	public class InProgressState implements IncidentState {
 		/**
 		 * Constructor for InProgress State
 		 */
@@ -342,7 +341,7 @@ public class Incident {
 			else if (c.getCommand() == Command.CommandValue.ASSIGN) {
 				setOwner(c.getCommandInformation());
 			}
-			else if (c.getCommand() == Command.CommandValue.CANCEL && (c.getCommandInformation().equals(CANCELLATION_CALLER_CANCELLED) || c.getCommandInformation().equals(CANCELLATION_DUPLICATE) || c.getCommandInformation().equals(CANCELLATION_NOT_AN_INCIDENT) || c.getCommandInformation().equals(HOLD_AWAITING_VENDOR))) {
+			else if (c.getCommand() == Command.CommandValue.CANCEL && (c.getCommandInformation().equals(CANCELLATION_CALLER_CANCELLED) || c.getCommandInformation().equals(CANCELLATION_DUPLICATE) || c.getCommandInformation().equals(CANCELLATION_NOT_AN_INCIDENT) || c.getCommandInformation().equals(CANCELLATION_UNNECESSARY))) {
 				state = canceled;
 				setOwner(UNOWNED);
 				setStatusDetails(c.getCommandInformation());
@@ -366,7 +365,7 @@ public class Incident {
 	 * @author Edwin Nealis
 	 *
 	 */
-	public class CanceledState implements IncidentState{
+	public class CanceledState implements IncidentState {
 		/**
 		 * Constructor for Canceled State
 		 */
@@ -395,7 +394,7 @@ public class Incident {
 	 * @author Edwin Nealis
 	 *
 	 */
-	public class OnHoldState implements IncidentState{
+	public class OnHoldState implements IncidentState {
 		/**
 		 * Constructor for On hold State
 		 */
@@ -489,9 +488,6 @@ public class Incident {
 			}
 			else if (c.getCommand() == Command.CommandValue.ASSIGN) {
 				setOwner(c.getCommandInformation());
-				state = inProgress;
-			}
-			else if (c.getCommand() == Command.CommandValue.INVESTIGATE) {
 				state = inProgress;
 			}
 			else {
