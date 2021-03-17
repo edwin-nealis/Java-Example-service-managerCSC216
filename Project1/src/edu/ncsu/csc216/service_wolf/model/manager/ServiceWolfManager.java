@@ -31,6 +31,7 @@ public class ServiceWolfManager {
 	private ServiceWolfManager() {
 		serviceGroups = new ArrayList<ServiceGroup>();
 		currentServiceGroup = null;
+		Incident.setCounter(1);
 	}
 
 	/**
@@ -313,6 +314,5 @@ public class ServiceWolfManager {
 	 */
 	protected void resetManager() {
 		instance = null;
-		Incident.setCounter(1);
 	}
 }
