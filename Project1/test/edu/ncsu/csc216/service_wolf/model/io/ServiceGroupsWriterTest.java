@@ -32,9 +32,18 @@ public class ServiceGroupsWriterTest {
 			try {
 				ServiceGroupWriter.writeServiceGroupsToFile(export, sg);
 			} catch (IllegalArgumentException e) {
-				fail("Cannot write to course records file");
+				fail("Cannot write to export file");
 			}
 		}
+	/**
+	 * tests constructor
+	 */
+	@Test
+	public void testServiceGroupWriter() {
+		ServiceGroupWriter sw = new ServiceGroupWriter();
+		assertEquals(sw.getClass(), ServiceGroupWriter.class);
+		
+	}
 		/**
 		 * Helper method to compare two files for the same contents
 		 * 

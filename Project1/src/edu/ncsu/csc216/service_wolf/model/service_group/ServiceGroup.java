@@ -59,7 +59,7 @@ public class ServiceGroup {
 	/**
 	 * add incident to incident array
 	 * @param i incident
-	 * @throws IllegaalArgumetnException if id is already used
+	 * @throws IllegalArgumentException if id is already used
 	 */
 	public void addIncident(Incident i) {
 		for (int j = 0; j < incidents.size(); j++) {

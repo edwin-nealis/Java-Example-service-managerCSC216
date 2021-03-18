@@ -50,7 +50,7 @@ public class ServiceWolfManager {
 	 * saves to a file
 	 * 
 	 * @param fileName file name
-	 * @throws IllegalArgumetnException if currentServiceGroup is null or has no incidents
+	 * @throws IllegalArgumentException if currentServiceGroup is null or has no incidents
 	 */
 	public void saveToFile(String fileName) {
 		if (currentServiceGroup == null || currentServiceGroup.getIncidents().size() == 0) {
@@ -168,7 +168,7 @@ public class ServiceWolfManager {
 	 * loads a service group
 	 * 
 	 * @param name name
-	 * @throws IllegalArgumetnException if service group does not exist
+	 * @throws IllegalArgumentException if service group does not exist
 	 */
 	public void loadServiceGroup(String name) {
 		if (!serviceGroups.isEmpty()) {
