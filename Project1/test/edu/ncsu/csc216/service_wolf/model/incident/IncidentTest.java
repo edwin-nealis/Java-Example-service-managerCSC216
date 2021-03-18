@@ -9,7 +9,8 @@ import org.junit.Test;
 
 import edu.ncsu.csc216.service_wolf.model.command.Command;
 /**
- * tests the incindent class
+ * tests the incindent class with methods that test the constructor a run through of all states in the fsm, and trasition in and out of
+ * the in progress state, new state, resolved state, and cancelled state.
  * @author edwin
  *
  */
@@ -169,7 +170,26 @@ public class IncidentTest {
 		assertEquals(i1.getStatusDetails(), Incident.CANCELLATION_CALLER_CANCELLED);
 		assertEquals(i1.getOwner(), Incident.UNOWNED);
 	}
-
+	/**
+	 * tests transition in and out of cancelled state
+	 */
+	@Test
+	public void testStateTransitionCancelled() {
+		Incident i1 = new Incident("title", "caller", "message");
+		assertEquals(i1.getState(), "New");
+		Command c1 = new Command(Command.CommandValue.CANCEL, Incident.CANCELLATION_CALLER_CANCELLED, "message");
+		i1.update(c1);
+		assertEquals(i1.getState(), Incident.CANCELED_NAME);
+		assertEquals(i1.getStatusDetails(), Incident.CANCELLATION_CALLER_CANCELLED);
+		assertEquals(i1.getOwner(), Incident.UNOWNED);
+		Command c2 = new Command(Command.CommandValue.REOPEN, null, "message1");
+		try {
+			i1.update(c2);
+		} 
+		catch (UnsupportedOperationException e) {
+			assertEquals(i1.getState(), Incident.CANCELED_NAME);
+		}
+	}
 	
 
 }
