@@ -164,6 +164,19 @@ public class ServiceWolfManagerTest {
 		assertEquals(s[0][1], "New");
 		assertEquals(s[0][2], "title1");
 		assertEquals(s[0][3], "No Status");
+		instance.loadFromFile(validFile);
+		assertEquals(instance.getServiceGroupName(), "CSC IT");
+		instance.addIncidentToServiceGroup("title2", "caller2", "message2");
+		String[][] s1 = instance.getIncidentsAsArray();
+		assertEquals(s1.length, 5);
+		assertEquals(s1[0][0], "2");
+		assertEquals(s1[0][1], "Canceled");
+		assertEquals(s1[0][2], "Piazza");
+		assertEquals(s1[0][3], "Not an Incident");
+		assertEquals(s1[4][0], "10");
+		assertEquals(s1[4][1], "New");
+		assertEquals(s1[4][2], "title2");
+		assertEquals(s1[4][3], "No Status");
 		instance.resetManager();
 	}
 

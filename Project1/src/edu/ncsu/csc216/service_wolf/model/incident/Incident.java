@@ -116,7 +116,7 @@ public class Incident {
 		setOwner(owner);
 		setStatusDetails(statusDetails);
 		if (id > Incident.counter) {
-			setCounter(id);
+			setCounter(id + 1);
 		}
 		setState(state);
 		if (incidentLog == null || incidentLog.isEmpty() || incidentLog.contains(null)) {
