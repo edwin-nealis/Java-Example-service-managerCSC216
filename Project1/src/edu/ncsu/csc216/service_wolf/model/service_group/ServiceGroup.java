@@ -27,7 +27,7 @@ public class ServiceGroup {
 		setServiceGroupName(serviceGroupName);
 	}
 	/**
-	 *  sets incident count 
+	 *  sets incident count  to one more than highest id in service group
 	 */
 	public void setIncidentCounter() {
 		int temp = 0;
@@ -59,6 +59,7 @@ public class ServiceGroup {
 	/**
 	 * add incident to incident array
 	 * @param i incident
+	 * @throws IllegaalArgumetnException if id is already used
 	 */
 	public void addIncident(Incident i) {
 		for (int j = 0; j < incidents.size(); j++) {

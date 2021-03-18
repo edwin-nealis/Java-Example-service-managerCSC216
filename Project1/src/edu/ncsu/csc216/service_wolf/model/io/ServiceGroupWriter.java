@@ -7,7 +7,7 @@ import java.util.List;
 
 import edu.ncsu.csc216.service_wolf.model.service_group.ServiceGroup;
 /**
- * class provides methods to write a service group to a file.
+ * class provides a method to write a service group to a file.
  * @author edwin
  *
  */
@@ -22,6 +22,7 @@ public class ServiceGroupWriter {
 	 * put service groups to a file with name fileName
 	 * @param fileName file name
 	 * @param list list of service groups
+	 * @throws IllegalArgumentException if file can not be read
 	 */
 	public static void writeServiceGroupsToFile(String fileName, List<ServiceGroup> list) {
 		PrintStream fileWriter;

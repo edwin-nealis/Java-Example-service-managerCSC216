@@ -106,6 +106,7 @@ public class Incident {
 	 * @param owner owner
 	 * @param statusDetails status details
 	 * @param incidentLog incident log
+	 * @throws IllegalArgumentException if incident log is null or empty
 	 */
 	public Incident(int id, String state, String title, String caller, int reopenCount, String owner, String statusDetails, ArrayList<String> incidentLog) {
 		setId(id);
@@ -128,6 +129,7 @@ public class Incident {
 	/** 
 	 * sets Id value 
 	 * @param id id
+	 * @throws IllegalArgumentException if id is less than 0
 	 */
 	private void setId(int id) {
 		if (id <= 0) {
@@ -145,6 +147,7 @@ public class Incident {
 	/** 
 	 * sets state 
 	 * @param state state
+	 * @throws IllegalArgumentException if null or empty state or if invalid state
 	 */
 	private void setState(String state) {
 		if (state == null || "".equals(state)) {
@@ -179,6 +182,7 @@ public class Incident {
 	/**
 	 * sets title
 	 * @param title title
+	 * @throws IllegalArgumentException if title is null or empty
 	 */
 	private void setTitle(String title) {
 		if (title == null || "".equals(title)) {
@@ -196,6 +200,7 @@ public class Incident {
 	/** 
 	 * sets caller 
 	 * @param caller caller
+	 * @throws IllegalArgumentException if Caller is null or empty
 	 */
 	private void setCaller(String caller) {
 		if (caller == null || "".equals(caller)) {
@@ -213,6 +218,7 @@ public class Incident {
 	/** 
 	 * sets reopen count 
 	 * @param reopenCount num time reopned
+	 * @throws IllegalArgumetnException if reopen count is less than 0
 	 */
 	private void setReopenCount(int reopenCount) {
 		if (reopenCount < 0) {
@@ -230,6 +236,7 @@ public class Incident {
 	/** 
 	 * sets owner 
 	 * @param owner owner
+	 * @throws IllegalArgumentException if owner is null or empty
 	 */
 	private void setOwner(String owner) {
 		if (owner == null || "".equals(owner)) {
@@ -247,6 +254,7 @@ public class Incident {
 	/**
 	 * sets StatusDetails
 	 * @param statusDetails status details
+	 * @throws IllegalArgumentException if statusDetails is null or empty
 	 */
 	private void setStatusDetails(String statusDetails) {
 		if (statusDetails == null || "".equals(statusDetails)) {
@@ -265,6 +273,7 @@ public class Incident {
 	 * adds message to incident log 
 	 * @param message message
 	 * @return index of incident message was added to
+	 * @throws IllegalArgumentException if message is null or empty
 	 */
 	private int addMessageToIncidentLog(String message) {
 		if (message == null || "".equals(message)) {
@@ -307,7 +316,7 @@ public class Incident {
 				+ reopenCount + "," + owner + "," + statusDetails + "\n" + getIncidentLogMessages();
 	}
 	/**
-	 * updates command
+	 * calls update state to update state with command
 	 * @param c command
 	 */
 	public void update(Command c) {
@@ -325,7 +334,7 @@ public class Incident {
 		 * Constructor for InProgress State
 		 */
 		private InProgressState() {
-			
+			//empty by choice
 		}
 		/**
 		 * updates state 
@@ -373,7 +382,7 @@ public class Incident {
 		 * Constructor for Canceled State
 		 */
 		private CanceledState() {
-			
+			//empty by choice
 		}
 		/**
 		 * updates state always throws if called
@@ -402,7 +411,7 @@ public class Incident {
 		 * Constructor for On hold State
 		 */
 		private OnHoldState() {
-			
+			//empty by choice
 		}
 		/**
 		 * updates state 
@@ -436,7 +445,7 @@ public class Incident {
 		 * Constructor for resolved State
 		 */
 		private ResolvedState() {
-			
+			//empty by choice
 		}
 		/**
 		 * updates state 
@@ -477,7 +486,7 @@ public class Incident {
 		 * Constructor for new State
 		 */
 		private NewState() {
-			
+			//empty by choice
 		}
 		/**
 		 * updates state 

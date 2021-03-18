@@ -9,7 +9,7 @@ import org.junit.Test;
 
 import edu.ncsu.csc216.service_wolf.model.incident.Incident;
 /**
- * tests the service group class
+ * tests the service group class wiht methods for deletInncident by id, set incident counter, and add incient.
  * @author edwin
  *
  */

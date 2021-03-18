@@ -11,7 +11,7 @@ import org.junit.Test;
 
 import edu.ncsu.csc216.service_wolf.model.service_group.ServiceGroup;
 /**
- * tests service group writer class
+ * tests service group writer class 
  * @author edwin
  *
  */
@@ -20,15 +20,7 @@ public class ServiceGroupsWriterTest {
 	private final String export = "test-files/export.txt";
 	/** valid file path */
 	private final String validFile = "test-files/incidents1.txt";
-	/**
-	 * tests service group writer method
-	 */
-	@Test
-	public void testServiceGroupWriter() {
-		Object writer = new ServiceGroupWriter();
-		assertTrue( writer instanceof ServiceGroupWriter );
 
-	}
 	/**
 	 * tests write service groups to file method
 	 */

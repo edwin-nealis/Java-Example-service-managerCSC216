@@ -9,7 +9,7 @@ import org.junit.Test;
 import edu.ncsu.csc216.service_wolf.model.service_group.ServiceGroup;
 
 /**
- * test service group reader class
+ * test service group reader class with methods for valid and invalid files
  * 
  * @author edwin
  *

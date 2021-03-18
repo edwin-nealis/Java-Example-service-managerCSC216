@@ -11,7 +11,8 @@ import org.junit.Test;
 
 import edu.ncsu.csc216.service_wolf.model.incident.Incident;
 /**
- * test service wolf manager class
+ * test service wolf manager class has methods that test save to file, load from file, delet incident by id, load service group
+ * , clear servicegroups, edit servicegroup, deleteservicegroup, and addincident to service group. also contains a set up and a helper to check files.
  * @author edwin
  *
  */
